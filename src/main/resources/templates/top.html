@@ -1,11 +1,81 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="menu">
+<head>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
 
 
+        nav {
+            background-color: #333;
+            margin: 0;
+            padding: 10px;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        nav .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        nav .container-fluid ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        nav .container-login ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+    </style>
+    <title>top 메뉴 바</title>
+</head>
 <body>
+<nav class="nav-container">
+    <div class="flex-container">
+        <div class="logo-area">
 
-
+        </div>
+        <div class="container-fluid">
+            <ul>
+                <li><a href="#">링크 1</a></li>
+                <li><a href="#">링크 2</a></li>
+                <li><a href="#">링크 3</a></li>
+                <li><a href="#">링크 4</a></li>
+                <li><a href="#">링크 5</a></li>
+            </ul>
+        </div>
+        <div class="container-login">
+            <ul>
+                <li><a href="#">회원가입</a></li>
+                <li><a href="#">로그인</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 </body>
-
 </html>
