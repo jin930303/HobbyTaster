@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<head>
+</head>
+<body>
+<form action="faqinput_save" method="post">
+  <table>
+    <tr>
+      <th>제목</th>
+      <td><input type="text" name="ftitle" id="ftitle" placeholder="제목을 입력해주세요." autofocus></td>
+    </tr>
+    <tr>
+      <th>내용</th>
+      <td>
+        <textarea rows="10" cols="30" name="fcontents" id="fcontents" placeholder="내용을 입력해주세요."></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="FAQ 등록">
+        <input type="reset" value="다시 작성">
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

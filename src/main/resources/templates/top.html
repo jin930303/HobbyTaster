@@ -2,61 +2,12 @@
 
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="menu">
 <head>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-        }
-
-
-        nav {
-            background-color: #333;
-            margin: 0;
-            padding: 10px;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-        }
-
-        nav .flex-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-
-        nav .container-fluid ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-        nav .container-login ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: right;
-            align-items: center;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/top.css}">
     <title>top 메뉴 바</title>
 </head>
-<body>
+<body style="margin:0;">
 <nav class="nav-container">
-    <div class="flex-container">
+    <div class="container">
         <div class="logo-area">
 
         </div>
@@ -67,6 +18,8 @@
                 <li><a href="#">링크 3</a></li>
                 <li><a href="#">링크 4</a></li>
                 <li><a href="#">링크 5</a></li>
+                <li><a href="faqin">FAQ 등록</a></li>
+                <li><a href="faqout">FAQ</a></li>
             </ul>
         </div>
         <div class="container-login">
