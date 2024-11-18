@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.sql.Clob;
 import java.time.LocalDate;
 
 @Entity
@@ -44,6 +46,7 @@ public class ClassEntity {
     String cminute;
 
     @Column
+
     String cadd;
 
     @Column
@@ -55,5 +58,13 @@ public class ClassEntity {
     @Column
     int ccnt;
 
+    @Column
+    String cmimage;
+
+    @Column
+    String cdimage;
+
+    @Column
+    String cdtext;
 
 }
