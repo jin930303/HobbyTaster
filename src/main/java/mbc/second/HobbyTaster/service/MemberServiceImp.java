@@ -1,5 +1,6 @@
 package mbc.second.HobbyTaster.service;
 
+import mbc.second.HobbyTaster.dto.MemberDTO;
 import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ public class MemberServiceImp implements MemberService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+
     @Override
-    public void insertm(MemberEntity me) {
-        me.setPw(bCryptPasswordEncoder.encode(me.getPw()));
+    public void insertm(MemberDTO dto) {
+        MemberEntity me=dto.entity(bCryptPasswordEncoder);
         mr.save(me);
     }
 }

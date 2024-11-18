@@ -47,7 +47,7 @@ public class Security {
                 .ignoringRequestMatchers("/membersave")  // 특정 경로에서만 CSRF 비활성화
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/", "/main", "/memberinput").permitAll()
+                .requestMatchers("/", "/main", "/memberinput", "/membersave").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -54,7 +54,7 @@
 
 </script>
 <body>
-<form th:action="membersave" method="post" onsubmit="return validateForm()">
+<form th:action="@{/membersave}" method="post" onsubmit="return validateForm()">
     <div>
         <label for="id">아이디</label>
         <input type="text" name="id" id="id">
@@ -100,12 +100,13 @@
             <option value="@kakao.com">@kakao.com</option>
             <option value="custom">직접입력</option>
         </select>
-        <input type="text" name="customDomain" id="customDomain" style="display:none;">    </div>
+        <input type="text" name="customDomain" id="customDomain" style="display:none;">
+    </div>
 
     <div>
         <label>전화번호</label>
-        010-<input type="text" name="phonemid" id="phonemid" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">
-        -<input type="text" name="phoneend" id="phoneend" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">
+        010-<input type="number" name="phonemid" id="phonemid" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">
+        -<input type="number" name="phoneend" id="phoneend" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">
     </div>
 
     <div>

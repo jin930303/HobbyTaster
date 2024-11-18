@@ -1,5 +1,6 @@
 package mbc.second.HobbyTaster.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import mbc.second.HobbyTaster.dto.MemberDTO;
 import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.service.MemberService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+@Slf4j
 @Controller
 public class MemberController {
 
@@ -29,11 +31,10 @@ public class MemberController {
     @PostMapping(value = "/membersave")
     public String membersave(@RequestParam("phonemid") int phonemid, @RequestParam("phoneend") int phoneend,
                              @RequestParam("email") String email, @RequestParam("domain") String domain, MemberDTO dto) {
-        dto.setPhone("010"+"-"+phonemid+"-"+phoneend);
         dto.setEmail(email+domain);
+        dto.setPhone("010"+"-"+phonemid+"-"+phoneend);
         dto.setAuth(1);
-        MemberEntity me=dto.entity();
-        ms.insertm(me);
+        ms.insertm(dto);
         return "redirect:/main";
     }
 

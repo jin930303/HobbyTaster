@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mbc.second.HobbyTaster.entity.MemberEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,10 +20,10 @@ public class MemberDTO {
     String address;
     int auth;
 
-    public MemberEntity entity() {
+    public MemberEntity entity(BCryptPasswordEncoder encoder) {
         return MemberEntity.builder()
                 .id(id)
-                .pw(pw)
+                .pw(encoder.encode(pw))
                 .nickname(nickname)
                 .name(name)
                 .gender(gender)
