@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 
+import java.sql.Clob;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -24,9 +25,11 @@ public class ClassDTO {
     int cpl;
     String cstate;
     int ccnt;
-
+    String cmimage;
+    String cdimage;
+    String cdtext;
 
     public ClassEntity centity() {
-        return (new ClassEntity(cnum,cat1,cat2,cname,cround,cteach,cdate,ctime,cminute,cadd,cpl,cstate,ccnt));
+        return (new ClassEntity(cnum,cat1,cat2,cname,cround,cteach,cdate,ctime,cminute,cadd,cpl,cstate,ccnt,cmimage,cdimage,cdtext));
     }
 }

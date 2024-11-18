@@ -35,8 +35,9 @@
     </script>
 </head>
 <body>
-<form action="csave" method="post">
+<form action="csave" method="post" enctype="multipart/form-data">
    <table>
+       <input type="hidden" name="cstate" id="cstate" th:value="stay" >
        <tr>
            <th>대분류</th>
            <td>
@@ -127,6 +128,25 @@
            <th>수강인원</th>
            <td>
                <input type="number" name="cpl" id="cpl" min="1" max="100" placeholder="수강인원 선택">
+           </td>
+       </tr>
+       <tr>
+       <tr>
+           <th>메인이미지</th>
+           <td>
+               <input type="file" name="cmimage" id="cmimage">
+           </td>
+       </tr>
+       <tr>
+           <th>디테일이미지</th>
+           <td>
+               <input type="file" name="cdimage" id="cdimage">
+           </td>
+       </tr>
+       <tr>
+           <th>내용</th>
+           <td>
+               <input type="text" name="cdtext" id="cdtext">
            </td>
        </tr>
        <tr>
