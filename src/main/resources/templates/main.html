@@ -90,7 +90,7 @@
                             </div>
                         </a>
                     </td>
-                    <td th:each="bread:${music}">빵
+                    <td th:each="bread:${bread}">빵
                         <a th:href="@{bread_page(num=${bread.cnum})}">
                             <div class="item-box">
                                 <img th:src="@{/image/}+${bread.cmimage}" width="150px">

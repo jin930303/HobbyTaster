@@ -17,40 +17,40 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String home(Model mo){
-        List<ClassInterface> doye = classService.doye_out();
+        List<ClassInterface> doye = classService.categoryclass("공예","도예");
         mo.addAttribute("doye",doye);
 
-        List<ClassInterface> doll = classService.doll_out();
+        List<ClassInterface> doll = classService.categoryclass("공예","인형");
         mo.addAttribute("doll",doll);
 
-        List<ClassInterface> jewell = classService.jewelle_out();
+        List<ClassInterface> jewell = classService.categoryclass("공예","쥬얼리");
         mo.addAttribute("jewell",jewell);
 
-        List<ClassInterface> drawing = classService.drawing_out();
+        List<ClassInterface> drawing = classService.categoryclass("예술","드로잉");
         mo.addAttribute("drawing",drawing);
 
-        List<ClassInterface> picture = classService.picture_out();
+        List<ClassInterface> picture = classService.categoryclass("예술","사진");
         mo.addAttribute("picture",picture);
 
-        List<ClassInterface> music = classService.music_out();
+        List<ClassInterface> music = classService.categoryclass("예술","음악");
         mo.addAttribute("music",music);
 
-        List<ClassInterface> cookie = classService.cookie_out();
+        List<ClassInterface> cookie = classService.categoryclass("베이킹","쿠키");
         mo.addAttribute("cookie",cookie);
 
-        List<ClassInterface> cake = classService.cake_out();
+        List<ClassInterface> cake = classService.categoryclass("베이킹","케이크");
         mo.addAttribute("cake",cake);
 
-        List<ClassInterface> bread = classService.bread_out();
+        List<ClassInterface> bread = classService.categoryclass("베이킹","빵");
         mo.addAttribute("bread",bread);
 
-        List<ClassInterface> wine = classService.wine_out();
+        List<ClassInterface> wine = classService.categoryclass("주류","와인");
         mo.addAttribute("wine",wine);
 
-        List<ClassInterface> beer = classService.beer_out();
+        List<ClassInterface> beer = classService.categoryclass("주류","맥주");
         mo.addAttribute("beer",beer);
 
-        List<ClassInterface> tradition = classService.tradition_out();
+        List<ClassInterface> tradition = classService.categoryclass("주류","전통주");
         mo.addAttribute("tradition",tradition);
         return "main";
     }

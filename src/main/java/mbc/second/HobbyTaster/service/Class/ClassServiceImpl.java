@@ -58,63 +58,8 @@ public class ClassServiceImpl implements ClassService {
     //메인 페이지
 
     @Override
-    public List<ClassInterface> doye_out() {
-        return classRepository.doye_out();
-    }
-
-    @Override
-    public List<ClassInterface> doll_out() {
-        return classRepository.doll_out();
-    }
-
-    @Override
-    public List<ClassInterface> jewelle_out() {
-        return classRepository.jewelle_out();
-    }
-
-    @Override
-    public List<ClassInterface> drawing_out() {
-        return classRepository.drawing_out();
-    }
-
-    @Override
-    public List<ClassInterface> picture_out() {
-        return classRepository.picture_out();
-    }
-
-    @Override
-    public List<ClassInterface> music_out() {
-        return classRepository.music_out();
-    }
-
-    @Override
-    public List<ClassInterface> cookie_out() {
-        return classRepository.cookie_out();
-    }
-
-    @Override
-    public List<ClassInterface> cake_out() {
-        return classRepository.cake_out();
-    }
-
-    @Override
-    public List<ClassInterface> bread_out() {
-        return classRepository.bread_out();
-    }
-
-    @Override
-    public List<ClassInterface> wine_out() {
-        return classRepository.wine_out();
-    }
-
-    @Override
-    public List<ClassInterface> beer_out() {
-        return classRepository.beer_out();
-    }
-
-    @Override
-    public List<ClassInterface> tradition_out() {
-        return classRepository.tradition_out();
+    public List<ClassInterface> categoryclass(String cat1, String cat2) {
+        return classRepository.categoryclass(cat1, cat2);
     }
 
 }

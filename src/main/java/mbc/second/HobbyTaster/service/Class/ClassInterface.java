@@ -20,5 +20,4 @@ public interface ClassInterface {
     String getCdimage();
     String getCdtext();
     long getCprice();
-    //123
 }
