@@ -1,0 +1,7 @@
+.main-container {
+    text-align: center; /* 부모 컨테이너에서 가운데 정렬 */
+}
+.main-image-box img {
+    display: inline-block; /* 이미지가 인라인 요소처럼 동작 */
+    height: 700px;
+}

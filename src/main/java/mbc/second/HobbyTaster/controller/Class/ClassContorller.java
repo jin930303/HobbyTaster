@@ -25,7 +25,7 @@ public class ClassContorller {
     @Autowired
     ClassService classService;
 
-    String path = "C:\\mbc6\\spring_boot\\HobbyTaster\\src\\main\\resources\\static\\image";
+    String path = "C:\\●mbc\\spring boot\\HobbyTaster\\src\\main\\resources\\static\\image";
 
     @GetMapping(value = "cinput")
     public String class0(){
@@ -70,7 +70,9 @@ public class ClassContorller {
 
     @GetMapping(value = "/detail")
     public String class3(Model mo, @RequestParam("cnum") long cnum){
-       ClassEntity dto= classService.detail(cnum);
+        classService.readcnt(cnum);
+
+        ClassEntity dto= classService.detail(cnum);
         mo.addAttribute("dto",dto);
 
         return "/class/cdetail";
