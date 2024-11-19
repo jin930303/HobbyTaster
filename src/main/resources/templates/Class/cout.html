@@ -8,13 +8,13 @@
      <tr>
             <th>번호</th><th>대분류</th><th>중분류</th><th>수업명</th><th>회차</th>
          <th>강사명/학원명</th><th>일자</th><th>시작시간</th><th>소요시간</th>
-       <th>장소</th><th>수강인원</th> <th>진행상태</th><th>비고</th>
+       <th>장소</th><th>수강인원</th><th>금액</th> <th>진행상태</th><th>비고</th>
      </tr>
         <tr th:each="my:${list}">
            <td th:text="${my.cnum}"></td> <td th:text="${my.cat1}"></td> <td th:text="${my.cat2}"></td>
             <td><a th:href="@{/detail(cnum=${my.cnum})}" th:text="${my.cname}"></a></td> <td th:text="${my.cround}"></td>
         <td th:text="${my.cteach}"></td> <td th:text="${my.cdate}"></td> <td th:text="${my.ctime}"></td> <td th:text="${my.cminute}"></td>
-            <td th:text="${my.cadd}"></td> <td th:text="${my.cpl}"></td> <td th:text="${my.cstate}"></td>
+            <td th:text="${my.cadd}"></td> <td th:text="${my.cpl}"></td><td th:text="${my.cprice}"></td> <td th:text="${my.cstate}"></td>
             <td colspan="4">
                 <a th:href="@{cstart(cnum=${my.cnum})}">진행</a>
                 <a th:href="@{creturn(cnum=${my.cnum})}">반려</a>

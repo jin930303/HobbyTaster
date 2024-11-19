@@ -2,37 +2,11 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{top::menu}"></div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head>
-    <script>
-        function updateSubCategory() {
-            // 대분류 선택 값 가져오기
-            const cat1 = document.getElementById('cat1').value;
-            const cat2 = document.getElementById('cat2');
-
-            // 중분류 초기화
-            cat2.innerHTML = '<option value="">-- 중분류 선택 --</option>';
-
-            // 대분류에 따른 중분류 옵션 설정
-            let options = [];
-            if (cat1 === '공예') {
-                options = ['도예', '인형', '쥬얼리'];
-            } else if (cat1 === '예술') {
-                options = ['드로잉', '사진', '음악'];
-            } else if (cat1 === '베이킹') {
-                options = ['쿠키', '케이크', '빵'];
-            } else if (cat1 === '주류') {
-                options = ['와인', '맥주', '전통주'];
-            }
-
-            // 중분류 옵션 추가
-            options.forEach(option => {
-                const opt = document.createElement('option');
-                opt.value = option;
-                opt.textContent = option;
-                cat2.appendChild(opt);
-            });
-        }
-    </script>
+    <script type="text/javascript" th:src="@{/js/cinput.js}"></script>
+    <script type="text/javascript" th:src="@{/js/address.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cinput.css}">
 </head>
 <body>
 <form action="csave" method="post" enctype="multipart/form-data">
@@ -67,7 +41,7 @@
         <tr>
             <th>회차</th>
             <td>
-                <input type="number" name="cround" id="cround" placeholder="회차">
+                <input type="number" name="cround" id="cround" placeholder="회차" min="1">
             </td>
         </tr>
        <tr>
@@ -86,6 +60,7 @@
            <th>시작시간</th>
            <td>
                <select  name="ctime" id="ctime">
+                   <option value="">-- 시작시간 선택 --</option>
                    <optgroup label="오전">
                        <option value="09:00">09:00</option>
                        <option value="10:00">10:00</option>
@@ -110,6 +85,7 @@
            <th>소요시간</th>
            <td>
                <select name="cminute" id="cminute">
+                   <option value="">-- 시간 선택 --</option>
                    <option value="30분">30분</option>
                    <option value="1시간">1시간</option>
                    <option value="1시간30분">1시간 30분</option>
@@ -121,16 +97,23 @@
        <tr>
            <th>장소</th>
            <td>
-               <input type="text" name="cadd" id="cadd" placeholder="장소">
+               <input type="text" id="postcode" placeholder="우편번호">
+               <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
+               <input type="text" id="address" name="address" placeholder="주소"><br>
+               <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소">
+               <input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
            </td>
        </tr>
        <tr>
            <th>수강인원</th>
            <td>
-               <input type="number" name="cpl" id="cpl" min="1" max="100" placeholder="수강인원 선택">
+               <input type="number" name="cpl" id="cpl" min="1" max="100" placeholder="인원수">
            </td>
        </tr>
        <tr>
+           <th>가격</th>
+           <td><input type="number" name="cprice" id="cprice" min="5000" >원</td>
+       </tr>
        <tr>
            <th>메인이미지</th>
            <td>
@@ -146,7 +129,7 @@
        <tr>
            <th>내용</th>
            <td>
-               <input type="text" name="cdtext" id="cdtext">
+               <textarea rows="20" cols="20" name="cdtext" id="cdtext" ></textarea>
            </td>
        </tr>
        <tr>

@@ -68,8 +68,11 @@ public class ClassEntity {
     @Column
     String cdtext;
 
+    @Column
+    long cprice;
+
     @Builder
-    public ClassEntity(long cnum, String cat1, String cat2, String cname, int cround, String cteach, LocalDate cdate, String ctime, String cminute, String cadd, int cpl, String cstate, int ccnt, String cmimage, String cdimage, String cdtext) {
+    public ClassEntity(long cnum, String cat1, String cat2, String cname, int cround, String cteach, LocalDate cdate, String ctime, String cminute, String cadd, int cpl, String cstate, int ccnt, String cmimage, String cdimage, String cdtext, int cprice) {
         this.cnum = cnum;
         this.cat1 = cat1;
         this.cat2 = cat2;
@@ -86,5 +89,6 @@ public class ClassEntity {
         this.cmimage = cmimage;
         this.cdimage = cdimage;
         this.cdtext = cdtext;
+        this.cprice = cprice;
     }
 }

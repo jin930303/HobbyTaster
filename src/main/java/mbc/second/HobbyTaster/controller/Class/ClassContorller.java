@@ -34,8 +34,11 @@ public class ClassContorller {
    }
 
     @PostMapping(value = "csave")
-    public String class1(@ModelAttribute("classDTO") ClassDTO classDTO, MultipartHttpServletRequest mul)throws IOException {
+    public String class1(@ModelAttribute("classDTO") ClassDTO classDTO, MultipartHttpServletRequest mul,
+                         @RequestParam("address") String address,@RequestParam("detailAddress") String detailAddress,
+                         @RequestParam("extraAddress") String extraAddress)throws IOException {
 
+        classDTO.setCadd(address+detailAddress+extraAddress);
 
         MultipartFile mf1= mul.getFile("cmimage");
         MultipartFile mf2= mul.getFile("cdimage");

@@ -21,13 +21,16 @@ public class ClassDTO {
     LocalDate cdate;
     String ctime;
     String cminute;
+    String address;
+    String detailAddress;
+    String extraAddress;
     String cadd;
     int cpl;
     String cstate;
     int ccnt;
     String cmimage1;
     String cdimage1;
-
+    int cprice;
     String cdtext;
 
     public ClassEntity centity() {
@@ -48,6 +51,7 @@ public class ClassDTO {
                 .cmimage(cmimage1)
                 .cdimage(cdimage1)
                 .cdtext(cdtext)
+                .cprice(cprice)
                 .build();
     }
 }
