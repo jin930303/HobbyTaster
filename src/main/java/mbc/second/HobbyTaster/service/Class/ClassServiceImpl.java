@@ -23,4 +23,30 @@ public class ClassServiceImpl implements ClassService {
     public List<ClassEntity> out() {
         return  classRepository.findAll();
     }
+
+    @Override
+    public ClassEntity detail(long cnum) {
+        return classRepository.findById(cnum).orElse(null);
+    }
+
+    @Override
+    public void start(long cnum) {
+        classRepository.start(cnum);
+
+    }
+
+    @Override
+    public void creturn(long cnum) {
+        classRepository.creturn(cnum);
+    }
+
+    @Override
+    public void cfinish(long cnum) {
+        classRepository.cfinish(cnum);
+    }
+
+    @Override
+    public void cdelete(long cnum) {
+        classRepository.deleteById(cnum);
+    }
 }

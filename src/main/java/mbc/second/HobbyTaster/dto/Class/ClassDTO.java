@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Clob;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -25,11 +25,29 @@ public class ClassDTO {
     int cpl;
     String cstate;
     int ccnt;
-    String cmimage;
-    String cdimage;
+    String cmimage1;
+    String cdimage1;
+
     String cdtext;
 
     public ClassEntity centity() {
-        return (new ClassEntity(cnum,cat1,cat2,cname,cround,cteach,cdate,ctime,cminute,cadd,cpl,cstate,ccnt,cmimage,cdimage,cdtext));
+        return ClassEntity.builder()
+                .cnum(cnum)
+                .cat1(cat1)
+                .cat2(cat2)
+                .cname(cname)
+                .cround(cround)
+                .cteach(cteach)
+                .cdate(cdate)
+                .ctime(ctime)
+                .cminute(cminute)
+                .cadd(cadd)
+                .cpl(cpl)
+                .cstate(cstate)
+                .ccnt(ccnt)
+                .cmimage(cmimage1)
+                .cdimage(cdimage1)
+                .cdtext(cdtext)
+                .build();
     }
 }
