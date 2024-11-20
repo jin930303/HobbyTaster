@@ -6,6 +6,7 @@ import mbc.second.HobbyTaster.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,8 +65,44 @@ public class ClassServiceImpl implements ClassService {
         return classRepository.categoryclass(cat1, cat2);
     }
 
+    //메인 검색
+    /*
+        Containing: 부분 일치 검색.
+        IgnoreCase: 대소문자 무시.
+        And, Or: 논리 조건 연결.
+    */
+    // 검색어만 입력
+    @Override
+    public List<ClassEntity> findByCnameAndCteach(String totSearch) {
+        return classRepository.findByCnameContainingIgnoreCaseOrCteachContainingIgnoreCase(totSearch, totSearch);
+    }
+    // 날짜만 선택
+    @Override
+    public List<ClassEntity> findByCdate(LocalDate totDay) {
+        return classRepository.findByCdate(totDay);
+    }
+    // 검색어, 날짜 다중 선택
+    @Override
+    public List<ClassEntity> findByCnameOrCteachAndCdate(String totSearch, LocalDate totDay) {
+        return classRepository.findByCdateAndCnameContainingIgnoreCaseOrCteachContainingIgnoreCase(totDay, totSearch, totSearch);
+    }
+    // 소요시간 선택
+    @Override
+    public List<ClassEntity> findByCtime(String time) {
+        return classRepository.findByCtimeContaining(time);
+    }
 
+    // 카테고리 1만 선택
+    @Override
+    public List<ClassEntity> findByCat1(String cat1) {
+        return classRepository.findByCat1Containing(cat1);
+    }
 
+    // 카테고리 2 선택
+    @Override
+    public List<ClassEntity> findByCat2(String cat2) {
+        return classRepository.findByCat2Containing(cat2);
+    }
 
 }
 

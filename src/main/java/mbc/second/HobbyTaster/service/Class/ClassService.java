@@ -1,10 +1,9 @@
 package mbc.second.HobbyTaster.service.Class;
 
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
-import mbc.second.HobbyTaster.entity.MemberEntity;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface ClassService {
 
@@ -28,6 +27,16 @@ public interface ClassService {
     // 메인 페이지
     List<ClassInterface> categoryclass(String cat1, String cat2);
 
+    // 메인 검색
+    List<ClassEntity> findByCnameAndCteach(String totSearch);
 
+    List<ClassEntity> findByCdate(LocalDate totDay);
 
+    List<ClassEntity> findByCnameOrCteachAndCdate(String totSearch, LocalDate totDay);
+
+    List<ClassEntity> findByCtime(String time);
+
+    List<ClassEntity> findByCat1(String cat1);
+
+    List<ClassEntity> findByCat2(String cat2);
 }

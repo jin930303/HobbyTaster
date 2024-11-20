@@ -7,9 +7,9 @@ import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.service.Class.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.annotation.AuthenticationPrincipal;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
