@@ -1,10 +1,206 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:replace="~{top::menu}"></div>
-
+<head>
+    <title>main page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <script type="text/javascript" th:src="@{/js/main.search.category.js}"></script>
+</head>
 <body>
-<h1>11zzzzzzzzz</h1>
+    <div th:replace="~{top::menu}"></div>
+    <div class="main-container">
+        <div class="main-image-box">
+            <img src="/image/고양이.jpg">
+        </div>
+        <div class="search-box">
+            <form action="total_search" method="post">
+                <!--검색할 때에는 수업명, 강사명-->
+                <div id="search-text">
+                    <input type="text" name="tot_search" placeholder="검색어를 입력해주세요." autofocus>
+                </div>
+                <!--날짜-->
+                <div id="search-day">
+                    <label>기간 선택</label>
+                    <input type="date" name="tot_day" id="tot_day">
+                </div>
+                <!--시간-->
+                <div id="search-time">
+                    <label><input type="checkbox" name="time" value="09:00" class="time-checkbox"> 09:00</label>
+                    <label><input type="checkbox" name="time" value="10:00" class="time-checkbox"> 10:00</label>
+                    <label><input type="checkbox" name="time" value="11:00" class="time-checkbox"> 11:00</label>
+                    <label><input type="checkbox" name="time" value="12:00" class="time-checkbox"> 12:00</label>
+                    <label><input type="checkbox" name="time" value="13:00" class="time-checkbox"> 13:00</label>
+                    <label><input type="checkbox" name="time" value="14:00" class="time-checkbox"> 14:00</label>
+                    <label><input type="checkbox" name="time" value="15:00" class="time-checkbox"> 15:00</label>
+                    <label><input type="checkbox" name="time" value="16:00" class="time-checkbox"> 16:00</label>
+                    <label><input type="checkbox" name="time" value="17:00" class="time-checkbox"> 17:00</label>
+                    <label><input type="checkbox" name="time" value="18:00" class="time-checkbox"> 18:00</label>
+                    <label><input type="checkbox" name="time" value="19:00" class="time-checkbox"> 19:00</label>
+                    <label><input type="checkbox" name="time" value="20:00" class="time-checkbox"> 20:00</label>
+                    <label><input type="checkbox" name="time" value="21:00" class="time-checkbox"> 21:00</label>
+                </div>
+                <!--카테고리-->
+                <div id="search-category">
+                    <label>대분류 선택</label>
+                    <input type="radio" name="cat1" id="cat1" value="공예" onclick="showSubCategory('category1')">공예
+                    <input type="radio" name="cat1" id="cat2" value="예술" onclick="showSubCategory('category2')">예술
+                    <input type="radio" name="cat1" id="cat3" value="베이킹" onclick="showSubCategory('category3')">베이킹
+                    <input type="radio" name="cat1" id="cat4" value="주류" onclick="showSubCategory('category4')">주류
+                </div>
+
+                <div id="category1" class="sub-category" style="display: none;">
+                    <label>공예 분야 선택</label>
+                    <input type="radio" name="cat2" value="도예">도예
+                    <input type="radio" name="cat2" value="인형">인형
+                    <input type="radio" name="cat2" value="쥬얼리">쥬얼리
+                </div>
+
+                <div id="category2" class="sub-category" style="display: none;">
+                    <label>예술 분야 선택</label>
+                    <input type="radio" name="cat2" value="드로잉">드로잉
+                    <input type="radio" name="cat2" value="사진">사진
+                    <input type="radio" name="cat2" value="음악">음악
+                </div>
+
+                <div id="category3" class="sub-category" style="display: none;">
+                    <label>베이킹 분야 선택</label>
+                    <input type="radio" name="cat2" value="쿠키">쿠키
+                    <input type="radio" name="cat2" value="케이크">케이크
+                    <input type="radio" name="cat2" value="빵">빵
+                </div>
+
+                <div id="category4" class="sub-category" style="display: none;">
+                    <label>주류 분야 선택</label>
+                    <input type="radio" name="cat2" value="와인">와인
+                    <input type="radio" name="cat2" value="맥주">맥주
+                    <input type="radio" name="cat2" value="전통주">전통주
+                </div>
+                <div>
+                    <input type="submit" value="검색">
+                    <input type="reset" value="조건 초기화">
+                </div>
+            </form>
+        </div>
+        <div class="categoty">
+            <table>
+                <tr>
+                    <th colspan="3">공예</th>
+                </tr>
+                <tr>
+                    <td th:each="doye:${doye}">도예
+                        <a th:href="@{doye_page(num=${doye.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${doye.cmimage}" width="150px">
+                                <p th:text="${doye.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="doll:${doll}">인형
+                        <a th:href="@{doll_page(num=${doll.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${doll.cmimage}" width="150px">
+                                <p th:text="${doll.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="jewell:${jewell}">쥬얼리
+                        <a th:href="@{jewell_page(num=${jewell.cnum})}">
+                                <div class="item-box">
+                                    <img th:src="@{/image/}+${jewell.cmimage}" width="150px">
+                                <p th:text="${jewell.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="3">예술</th>
+                </tr>
+                <tr>
+                    <td th:each="drawing:${drawing}">드로잉
+                        <a th:href="@{drawing_page(num=${drawing.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${drawing.cmimage}" width="150px">
+                                <p th:text="${drawing.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="picture:${picture}">사진
+                        <a th:href="@{picture_page(num=${picture.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${picture.cmimage}" width="150px">
+                                <p th:text="${picture.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="music:${music}">음악
+                        <a th:href="@{music_page(num=${music.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${music.cmimage}" width="150px">
+                                <p th:text="${music.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="3">베이킹</th>
+                </tr>
+                <tr>
+                    <td th:each="cookie:${cookie}">쿠키
+                        <a th:href="@{cookie_page(num=${cookie.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${cookie.cmimage}" width="150px">
+                                <p th:text="${cookie.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="cake:${cake}">케이크
+                        <a th:href="@{cake_page(num=${cake.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${cake.cmimage}" width="150px">
+                                <p th:text="${cake.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="bread:${bread}">빵
+                        <a th:href="@{bread_page(num=${bread.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${bread.cmimage}" width="150px">
+                                <p th:text="${bread.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="3">주류</th>
+                </tr>
+                <tr>
+                    <td th:each="wine:${wine}">쿠키
+                        <a th:href="@{wine_page(num=${wine.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${wine.cmimage}" width="150px">
+                                <p th:text="${wine.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="beer:${beer}">케이크
+                        <a th:href="@{beer_page(num=${beer.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${beer.cmimage}" width="150px">
+                                <p th:text="${beer.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                    <td th:each="tradition:${tradition}">빵
+                        <a th:href="@{tradition_page(num=${tradition.cnum})}">
+                            <div class="item-box">
+                                <img th:src="@{/image/}+${tradition.cmimage}" width="150px">
+                                <p th:text="${tradition.cname}"></p>
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>
