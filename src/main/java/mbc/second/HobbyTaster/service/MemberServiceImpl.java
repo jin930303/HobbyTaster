@@ -1,3 +1,4 @@
+
 package mbc.second.HobbyTaster.service;
 
 import mbc.second.HobbyTaster.dto.MemberDTO;
@@ -8,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MemberServiceImp implements MemberService {
+public class MemberServiceImpl implements MemberService {
 
     @Autowired
     MemberRepository mr;
@@ -23,4 +24,11 @@ public class MemberServiceImp implements MemberService {
         MemberEntity me=dto.entity(bCryptPasswordEncoder);
         mr.save(me);
     }
+
+    @Override
+    public MemberEntity findbyid(String id) {
+        return mr.findById(id)
+                .orElseThrow(() -> new RuntimeException("Member not found with id: " + id));
+    }
 }
+
