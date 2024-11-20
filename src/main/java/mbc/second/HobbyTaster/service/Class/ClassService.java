@@ -1,8 +1,10 @@
 package mbc.second.HobbyTaster.service.Class;
 
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
+import mbc.second.HobbyTaster.entity.MemberEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClassService {
 
@@ -25,4 +27,7 @@ public interface ClassService {
 
     // 메인 페이지
     List<ClassInterface> categoryclass(String cat1, String cat2);
+
+
+
 }

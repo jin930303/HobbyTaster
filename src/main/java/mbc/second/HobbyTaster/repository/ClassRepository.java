@@ -1,8 +1,8 @@
 package mbc.second.HobbyTaster.repository;
 
 import jakarta.transaction.Transactional;
-import mbc.second.HobbyTaster.dto.Class.ClassDTO;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
+import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.service.Class.ClassInterface;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -42,4 +42,10 @@ public interface ClassRepository extends JpaRepository<ClassEntity,Long> {
     @Modifying
     @Query(value = "SELECT * FROM (SELECT * FROM cclass WHERE cat1 = :cat1 AND cat2 = :cat2 ORDER BY ccnt DESC) WHERE ROWNUM = 1", nativeQuery = true)
     List<ClassInterface> categoryclass(@Param("cat1") String cat1,@Param("cat2") String cat2);
+
+
+
+
+
+
 }

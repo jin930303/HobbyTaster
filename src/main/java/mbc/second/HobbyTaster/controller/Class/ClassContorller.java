@@ -1,11 +1,18 @@
 package mbc.second.HobbyTaster.controller.Class;
 
+
+import lombok.extern.slf4j.Slf4j;
 import mbc.second.HobbyTaster.dto.Class.ClassDTO;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
+import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.service.Class.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +26,16 @@ import java.util.List;
 import java.util.UUID;
 
 
+@Slf4j
 @Controller
 public class ClassContorller {
 
     @Autowired
     ClassService classService;
 
-    String path = "C:\\●mbc\\spring boot\\HobbyTaster\\src\\main\\resources\\static\\image";
+
+
+    String path = "C:\\mbc6\\spring_boot\\HobbyTaster\\src\\main\\resources\\static\\image";
 
     @GetMapping(value = "cinput")
     public String class0(){
@@ -34,32 +44,30 @@ public class ClassContorller {
    }
 
     @PostMapping(value = "csave")
-    public String class1(@ModelAttribute("classDTO") ClassDTO classDTO, MultipartHttpServletRequest mul,
-                         @RequestParam("address") String address,@RequestParam("detailAddress") String detailAddress,
-                         @RequestParam("extraAddress") String extraAddress)throws IOException {
+        public String class1(@ModelAttribute("classDTO") ClassDTO classDTO, MultipartHttpServletRequest mul)throws IOException {
 
-        classDTO.setCadd(address+detailAddress+extraAddress);
+            classDTO.mergeAddress();
 
-        MultipartFile mf1= mul.getFile("cmimage");
-        MultipartFile mf2= mul.getFile("cdimage");
+            MultipartFile mf1= mul.getFile("cmimage");
+            MultipartFile mf2= mul.getFile("cdimage");
 
-        String fname1= mf1.getOriginalFilename();
-        String fname2= mf2.getOriginalFilename();
+            String fname1= mf1.getOriginalFilename();
+            String fname2= mf2.getOriginalFilename();
 
-        UUID uu=UUID.randomUUID();
-        fname1=uu.toString()+"-"+fname1;
-        fname2=uu.toString()+"-"+fname2;
+            UUID uu=UUID.randomUUID();
+            fname1=uu.toString()+"-"+fname1;
+            fname2=uu.toString()+"-"+fname2;
 
-        mf1.transferTo(new File(path+"\\"+fname1));
-        mf2.transferTo(new File(path+"\\"+fname2));
+            mf1.transferTo(new File(path+"\\"+fname1));
+            mf2.transferTo(new File(path+"\\"+fname2));
 
-        classDTO.setCmimage1(fname1);
-        classDTO.setCdimage1(fname2);
-        ClassEntity centity=classDTO.centity();
-        classService.cinsert(centity);
+            classDTO.setCmimage1(fname1);
+            classDTO.setCdimage1(fname2);
+            ClassEntity centity=classDTO.centity();
+            classService.cinsert(centity);
 
-        return "redirect:/";
-    }
+            return "redirect:/";
+        }
 
     @GetMapping(value = "cout")
     public String class2(Model mo){

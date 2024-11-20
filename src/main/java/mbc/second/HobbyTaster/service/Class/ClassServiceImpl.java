@@ -1,11 +1,13 @@
 package mbc.second.HobbyTaster.service.Class;
 
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
+import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClassServiceImpl implements ClassService {
@@ -61,6 +63,9 @@ public class ClassServiceImpl implements ClassService {
     public List<ClassInterface> categoryclass(String cat1, String cat2) {
         return classRepository.categoryclass(cat1, cat2);
     }
+
+
+
 
 }
 

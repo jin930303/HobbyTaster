@@ -9,8 +9,9 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/cinput.css}">
 </head>
 <body>
-<form action="csave" method="post" enctype="multipart/form-data">
+<form action="csave" method="post" enctype="multipart/form-data" >
    <table>
+       <div th:text="${#authentication.toString()}"></div>
        <input type="hidden" name="cstate" id="cstate" th:value="대기" >
        <tr>
            <th>대분류</th>
@@ -33,33 +34,34 @@
             </td>
         </tr>
     <tr>
-        <th>수업명</th>
+        <th><label for="cname">강의명</label></th>
         <td>
-            <input type="text" name="cname" id="cname" placeholder="수업명">
+            <input type="text" id="cname" name="cname"  autofocus="autofocus" required>
+
         </td>
     </tr>
         <tr>
             <th>회차</th>
             <td>
-                <input type="number" name="cround" id="cround" placeholder="회차" min="1">
+                <input type="number" name="cround" id="cround" placeholder="회차" min="1" required>
             </td>
         </tr>
        <tr>
            <th>강사명/학원명</th>
            <td>
-               <input type="text" name="cteach" id="cteach" placeholder="강사명/학원명">
+               <input type="text" name="cteach" id="cteach"  >
            </td>
        </tr>
        <tr>
            <th>일자</th>
            <td>
-               <input type="date" name="cdate" id="cdate">
+               <input type="date" name="cdate" id="cdate" required>
            </td>
        </tr>
        <tr>
            <th>시작시간</th>
            <td>
-               <select  name="ctime" id="ctime">
+               <select  name="ctime" id="ctime" required>
                    <option value="">-- 시작시간 선택 --</option>
                    <optgroup label="오전">
                        <option value="09:00">09:00</option>
@@ -84,7 +86,7 @@
        <tr>
            <th>소요시간</th>
            <td>
-               <select name="cminute" id="cminute">
+               <select name="cminute" id="cminute" required>
                    <option value="">-- 시간 선택 --</option>
                    <option value="30분">30분</option>
                    <option value="1시간">1시간</option>
@@ -99,7 +101,7 @@
            <td>
                <input type="text" id="postcode" placeholder="우편번호">
                <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
-               <input type="text" id="address" name="address" placeholder="주소"><br>
+               <input type="text" id="address" name="address" placeholder="주소" required><br>
                <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소">
                <input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
            </td>
@@ -107,12 +109,12 @@
        <tr>
            <th>수강인원</th>
            <td>
-               <input type="number" name="cpl" id="cpl" min="1" max="100" placeholder="인원수">
+               <input type="number" name="cpl" id="cpl" min="1" max="100" placeholder="인원수" required>
            </td>
        </tr>
        <tr>
            <th>가격</th>
-           <td><input type="number" name="cprice" id="cprice" min="5000" >원</td>
+           <td><input type="number" name="cprice" id="cprice" min="10000" step="1000" required>원</td>
        </tr>
        <tr>
            <th>메인이미지</th>
@@ -129,7 +131,7 @@
        <tr>
            <th>내용</th>
            <td>
-               <textarea rows="20" cols="20" name="cdtext" id="cdtext" ></textarea>
+               <textarea rows="20" cols="20" name="cdtext" id="cdtext" required></textarea>
            </td>
        </tr>
        <tr>

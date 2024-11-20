@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -16,7 +15,7 @@ public class ClassDTO {
     String cat1;
     String cat2;
     String cname;
-    int cround;
+    Integer cround;
     String cteach;
     LocalDate cdate;
     String ctime;
@@ -25,13 +24,17 @@ public class ClassDTO {
     String detailAddress;
     String extraAddress;
     String cadd;
-    int cpl;
+    Integer cpl;
     String cstate;
-    int ccnt;
+    Integer ccnt;
     String cmimage1;
     String cdimage1;
-    int cprice;
+    Integer cprice;
     String cdtext;
+
+    public void mergeAddress() {
+        this.cadd = String.join("", address, detailAddress, extraAddress);
+    }
 
     public ClassEntity centity() {
         return ClassEntity.builder()

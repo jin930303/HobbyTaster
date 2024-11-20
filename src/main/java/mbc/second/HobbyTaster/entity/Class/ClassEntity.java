@@ -32,7 +32,7 @@ public class ClassEntity {
     String cname;
 
     @Column
-    int cround;
+    Integer cround;
 
     @Column
     String cteach;
@@ -51,13 +51,13 @@ public class ClassEntity {
     String cadd;
 
     @Column
-    int cpl;
+    Integer cpl;
 
     @Column
     String cstate;
 
     @Column
-    int ccnt;
+    Integer ccnt;
 
     @Column
     String cmimage;
@@ -69,10 +69,10 @@ public class ClassEntity {
     String cdtext;
 
     @Column
-    long cprice;
+    Integer cprice;
 
     @Builder
-    public ClassEntity(long cnum, String cat1, String cat2, String cname, int cround, String cteach, LocalDate cdate, String ctime, String cminute, String cadd, int cpl, String cstate, int ccnt, String cmimage, String cdimage, String cdtext, int cprice) {
+    public ClassEntity(long cnum, String cat1, String cat2, String cname, Integer cround, String cteach, LocalDate cdate, String ctime, String cminute, String cadd, Integer cpl, String cstate, Integer ccnt, String cmimage, String cdimage, String cdtext, Integer cprice) {
         this.cnum = cnum;
         this.cat1 = cat1;
         this.cat2 = cat2;
