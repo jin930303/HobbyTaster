@@ -37,17 +37,19 @@ public class Security {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         /* @formatter:off */
         http
                 .csrf()
-                .ignoringRequestMatchers("/membersave")  // 특정 경로에서만 CSRF 비활성화
+                .ignoringRequestMatchers("/membersave", "/kakaosave",
+                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck")  // 특정 경로에서만 CSRF 비활성화
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/", "/main", "/memberinput", "/membersave").permitAll()
+                .requestMatchers("/", "/main", "/memberinput", "/membersave", "/kakaoinput", "/kakaosave",
+                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck",
+                        "/css/**", "/js/**", "/image/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

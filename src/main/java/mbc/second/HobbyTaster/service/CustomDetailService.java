@@ -41,7 +41,8 @@ public class CustomDetailService implements UserDetailsService {
             // USER 라는 역할을 넣어준다. SimpleGrantedAuthority는 GrantedAuthority를 상속받은 클래스,
             // role를 USER로 설정(역할을 user로 설정)
             return new User(memberEntity.getId(), memberEntity.getPw(), grantedAuthorities);
-        } else {
+        }
+        else {
             throw new UsernameNotFoundException("can not find User : " + id);
         }
     }

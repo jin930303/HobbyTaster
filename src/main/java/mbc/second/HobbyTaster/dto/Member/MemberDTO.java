@@ -1,4 +1,4 @@
-package mbc.second.HobbyTaster.dto;
+package mbc.second.HobbyTaster.dto.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
