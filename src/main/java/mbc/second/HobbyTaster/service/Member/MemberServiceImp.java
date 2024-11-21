@@ -41,4 +41,11 @@ public class MemberServiceImp implements MemberService {
     public int phonecheck(String fullphone) {
         return mr.phonecheck(fullphone);
     }
+
+    @Override
+    public MemberEntity findbyid(String id) {
+        return mr.findById(id)
+                .orElseThrow(() -> new RuntimeException("Member not found with id: " + id));
+    }
+
 }
