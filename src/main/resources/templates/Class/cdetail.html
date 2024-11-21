@@ -4,26 +4,37 @@
 <div th:replace="~{top::menu}"></div>
 
 <body>
-<table>
-    <tr>
-        <th>메인이미지</th>
-        <td><a><img th:src="@{/image/}+${dto.cmimage}" width="500" height="500"></a></td>
+<div id="Left-container">
+  <div id="imgcontainer">
+    <img th:src="@{/image/}+${}">
+  </div>
+  </div>
 
-    </tr>
-    <tr>
-        <th>상세이미지</th>
-        <td><a><img th:src="@{/image/}+${dto.cdimage}" width="700" height="700"></a></td>
-    </tr>
-    <tr>
-        <th>상세내용</th>
-        <td th:text="${dto.cdtext}"></td>
-    </tr>
-    <tr>
-        <td>
-            <a th:href="@{/cout}">뒤로가기</a>
-        </td>
-    </tr>
-</table>
+<div id="Right-contianer">
+  <div id="ctitle">
+    <a th:text="${}"></a>
+  </div>
+<div id="cprice">
+  <a th:text="${}"></a>
+</div>
+  <div id="ctime">
+  <a th:text="${}"></a>
+</div>
+</div>
+
+<div id="detail-container">
+
+
+</div>
+
+<div id="map-container">
+
+</div>
+
+<div id="review-container">
+
+
+</div>
+
 </body>
-
 </html>

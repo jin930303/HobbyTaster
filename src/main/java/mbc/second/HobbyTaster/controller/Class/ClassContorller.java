@@ -94,7 +94,7 @@ public class ClassContorller {
         ClassEntity dto= classService.detail(cnum);
         mo.addAttribute("dto",dto);
 
-        return "/class/cdetail";
+        return "/class/cadmindetail";
     }
 
     @GetMapping(value = "/cstart")
