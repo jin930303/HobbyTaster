@@ -1,7 +1,68 @@
-.main-container {
-    text-align: center; /* 부모 컨테이너에서 가운데 정렬 */
+/* 네비게이션 바 간격 유지 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
 }
+
+/* 메인 컨테이너 */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 메인 이미지 */
 .main-image-box img {
-    display: inline-block; /* 이미지가 인라인 요소처럼 동작 */
-    height: 700px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* 초기 검색창 */
+.click-search {
+    position: relative;
+    z-index: 1;
+}
+
+.click-search input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 상단에서 내려오는 확장 검색창 */
+.hidden-search {
+    position: fixed;
+    top: -400px; /* 초기 상태에서 화면 위로 숨김 */
+    width: 50%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    text-align: center;
+    transition: top 0.5s ease; /* 부드러운 애니메이션 */
+    z-index: 999; /* nav 위로 표시 */
+}
+
+.hidden-search input[type="text"],
+.hidden-search input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    height: 25%;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    justify-content: center;
+}
+
+/* 검색창 활성화 상태 */
+.hidden-search.active,
+.hidden-search.focus {
+    top: 0; /* nav 바로 아래로 표시 */
+    /*background-color : rgb(255,255,255,0.8);*/
 }
