@@ -44,11 +44,11 @@ public class Security {
         http
                 .csrf()
                 .ignoringRequestMatchers("/membersave", "/kakaosave",
-                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck", "/total_search")  // 특정 경로에서만 CSRF 비활성화
+                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck", "/total_search","/csave")  // 특정 경로에서만 CSRF 비활성화
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/", "/main", "/memberinput", "/membersave", "/kakaoinput", "/kakaosave", "/total_search",
-                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck",
+                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/csave",
                         "/css/**", "/js/**", "/image/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
