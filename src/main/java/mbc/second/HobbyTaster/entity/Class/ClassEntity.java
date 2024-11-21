@@ -56,8 +56,8 @@ public class ClassEntity {
     @Column
     String cstate;
 
-    @Column
-    Integer ccnt;
+    @Column(nullable = false)
+    Integer ccnt = 0;
 
     @Column
     String cmimage;

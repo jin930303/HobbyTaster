@@ -26,7 +26,7 @@ public class ClassDTO {
     String cadd;
     Integer cpl;
     String cstate;
-    Integer ccnt;
+    Integer ccnt =0;
     String cmimage1;
     String cdimage1;
     Integer cprice;

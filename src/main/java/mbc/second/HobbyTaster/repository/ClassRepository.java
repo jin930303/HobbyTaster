@@ -1,7 +1,7 @@
 package mbc.second.HobbyTaster.repository;
 
 import jakarta.transaction.Transactional;
-import mbc.second.HobbyTaster.dto.Class.ClassDTO;
+
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.service.Class.ClassInterface;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +18,7 @@ public interface ClassRepository extends JpaRepository<ClassEntity,Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "update cclass set cstate ='시작' where cclass.cnum=:cnum",nativeQuery = true)
+    @Query(value = "update cclass set cstate ='진행' where cclass.cnum=:cnum",nativeQuery = true)
     void start(@Param("cnum") long cnum);
 
     @Transactional
