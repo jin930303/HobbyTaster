@@ -15,18 +15,46 @@ public class ClassDTO {
     String cat1;
     String cat2;
     String cname;
-    int cround;
+    Integer cround;
     String cteach;
     LocalDate cdate;
     String ctime;
     String cminute;
+    String address;
+    String detailAddress;
+    String extraAddress;
     String cadd;
-    int cpl;
+    Integer cpl;
     String cstate;
-    int ccnt;
+    Integer ccnt;
+    String cmimage1;
+    String cdimage1;
+    Integer cprice;
+    String cdtext;
 
+    public void mergeAddress() {
+        this.cadd = String.join("", address, detailAddress, extraAddress);
+    }
 
     public ClassEntity centity() {
-        return (new ClassEntity(cnum,cat1,cat2,cname,cround,cteach,cdate,ctime,cminute,cadd,cpl,cstate,ccnt));
+        return ClassEntity.builder()
+                .cnum(cnum)
+                .cat1(cat1)
+                .cat2(cat2)
+                .cname(cname)
+                .cround(cround)
+                .cteach(cteach)
+                .cdate(cdate)
+                .ctime(ctime)
+                .cminute(cminute)
+                .cadd(cadd)
+                .cpl(cpl)
+                .cstate(cstate)
+                .ccnt(ccnt)
+                .cmimage(cmimage1)
+                .cdimage(cdimage1)
+                .cdtext(cdtext)
+                .cprice(cprice)
+                .build();
     }
 }

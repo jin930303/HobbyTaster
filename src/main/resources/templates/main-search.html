@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<head>
+    <title>main-search</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>수업명</th>
+        <th>강사명</th>
+        <th>수강인원</th>
+        <th>체험금액</th>
+        <th>수업일자</th>
+        <th>소요시간</th>
+        <th>카테고리1</th>
+        <th>카테고리2</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(results)}">
+        <td colspan="4" style="text-align: center;">검색 결과가 없습니다.</td>
+    </tr>
+    <tr th:each="item : ${results}" th:unless="${#lists.isEmpty(results)}">
+        <td th:text="${item.cname}"></td>
+        <td th:text="${item.cteach}"></td>
+        <td th:text="${item.cpl}"></td>
+        <td th:text="${item.cprice}"></td>
+        <td th:text="${item.cdate}"></td>
+        <td th:text="${item.ctime}"></td>
+        <td th:text="${item.cat1}"></td>
+        <td th:text="${item.cat2}"></td>
+    </tr>
+</table>
+</body>
+</html>
