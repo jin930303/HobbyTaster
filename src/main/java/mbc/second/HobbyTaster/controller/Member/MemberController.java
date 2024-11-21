@@ -71,18 +71,6 @@ public class MemberController {
         }
     }
 
-    @PostMapping("/emailcheck")
-    @ResponseBody
-    public String emailcheck(@RequestParam("fullemail") String fullemail) {
-        int count=ms.emailcheck(fullemail);
-        if(count==0) {
-            return "ok";
-        }
-        else {
-            return "no";
-        }
-    }
-
     @PostMapping("/phonecheck")
     @ResponseBody
     public String phonecheck(@RequestParam("fullphone") String fullphone) {
