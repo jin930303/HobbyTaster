@@ -1,9 +1,5 @@
-    var isNicknameAvailable = false;
-    var isIdAvailable = false;
-	var isemailAvailable = false;
-	var isPhoneAvailable = false;
-
     $(document).ready(function() {
+        var isidAvailable = false;
         $("#idcf").click(function() {
             var id = $("#id").val();
             var idRegex = /^[a-zA-Z0-9]{4,12}$/;
@@ -20,16 +16,17 @@
                 success: function(data) {
                     if (data == "ok") {
                         alert("사용 가능한 아이디입니다.");
-                        isIdAvailable = true;
+                        isidAvailable = true;
                     } else {
                         alert("이미 사용중인 아이디입니다.");
-                        isIdAvailable = false;
+                        isidAvailable = false;
                         $("#id").focus();
                     }
                 }
             });
         });
 
+        var isnicknameAvailable = false;
         $("#nncf").click(function() {
             var nickname = $("#nickname").val();
             if (nickname.trim() === "") {
@@ -45,11 +42,11 @@
                 success: function(data) {
                     if (data == "ok") {
                         alert("사용 가능한 닉네임입니다.");
-                        isNicknameAvailable = true;
+                        isnicknameAvailable = true;
                     }
                     else {
                         alert("이미 사용중인 닉네임입니다.");
-                        isNicknameAvailable = false;
+                        isnicknameAvailable = false;
                         $("#nickname").focus();
                     }
                 }
@@ -67,7 +64,7 @@
 
 
             var fullemail = email+domain; // 전체 전화번호 조합
-
+           	var isfullemailAvailable = false;
             $.ajax({
                 type: "post",
                 url: "emailcheck",
@@ -76,11 +73,11 @@
                 success: function(data) {
                     if (data == "ok") {
                         alert("사용 가능한 이메일입니다.");
-                        isemailAvailable = true;
+                        isfullemailAvailable = true;
                     }
                     else {
                         alert("이미 사용중인 이메일입니다.");
-                        isemailAvailable = false;
+                        isfullemailAvailable = false;
                         $("#email").focus();
                     }
                 }
@@ -110,7 +107,7 @@
             }
 
             var fullphone = "010-"+ phonemid + "-" + phoneend; // 전체 전화번호 조합
-
+        	var isfullphoneAvailable = false;
             $.ajax({
                 type: "post",
                 url: "phonecheck", // 서버에서 처리할 URL
@@ -119,11 +116,11 @@
                 success: function(data) {
                     if (data == "ok") {
                         alert("사용 가능한 전화번호입니다.");
-                        isPhoneAvailable = true; // 전화번호 사용 가능 플래그
+                        isfullphoneAvailable = true; // 전화번호 사용 가능 플래그
                     }
                     else {
                         alert("이미 사용중인 전화번호입니다.");
-                        isPhoneAvailable = false; // 전화번호 사용 불가 플래그
+                        isfullphoneAvailable = false; // 전화번호 사용 불가 플래그
                         $("#phonemid").focus();
                     }
                 }

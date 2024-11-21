@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function searchAddress() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -19,7 +18,6 @@ function cancelAddress() {
     inputda.value="";
     inputda.readOnly=true;
 }
-=======
   function DaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -67,4 +65,3 @@ function cancelAddress() {
             }
         }).open();
     }
->>>>>>> origin/stage
