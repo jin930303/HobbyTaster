@@ -26,5 +26,3 @@
                 cat2.appendChild(opt);
             });
         }
-
-
