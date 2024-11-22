@@ -24,9 +24,19 @@ public class MemberController {
     @Autowired
     MemberRepository mr;
 
+    @GetMapping(value = "/member")
+    public String member1(){
+        return "member/member";
+    }
+
     @GetMapping(value = "/memberinput")
     public String memberinput(){
         return "member/memberinput";
+    }
+
+    @GetMapping(value = "/teacherinput")
+    public String teacherinput(){
+        return "member/teacherinput";
     }
 
     @GetMapping("/kakaoinput")
@@ -45,6 +55,46 @@ public class MemberController {
             mo.addAttribute("pw", pw);
             return "member/kakaologin";
         }
+    }
+
+    @PostMapping(value = "/membersave")
+    public String membersave(@RequestParam("phonemid") int phonemid, @RequestParam("phoneend") int phoneend,
+                             @RequestParam("email") String email, @RequestParam("domain") String domain,
+                             @RequestParam("postnum") String postnum, @RequestParam("address") String address,
+                             @RequestParam("detailaddress") String detailaddress, MemberDTO dto) {
+        dto.setAddress(postnum+" "+address+" "+detailaddress);
+        dto.setEmail(email+domain);
+        dto.setPhone("010"+"-"+phonemid+"-"+phoneend);
+        dto.setAuth(1);
+        dto.setState("승인");
+        ms.insertm(dto);
+        return "redirect:/main";
+    }
+
+    @PostMapping(value = "/kakaosave")
+    public String kakaosave(@RequestParam("phonemid") int phonemid, @RequestParam("phoneend") int phoneend,
+                            @RequestParam("postnum") String postnum, @RequestParam("address") String address,
+                            @RequestParam("detailaddress") String detailaddress, MemberDTO dto) {
+        dto.setAddress(postnum+" "+address+" "+detailaddress);
+        dto.setPhone("010"+"-"+phonemid+"-"+phoneend);
+        dto.setAuth(1);
+        dto.setState("승인");
+        ms.insertm(dto);
+        return "redirect:/main";
+    }
+
+    @PostMapping(value = "/teachersave")
+    public String teachersave(@RequestParam("phonemid") int phonemid, @RequestParam("phoneend") int phoneend,
+                              @RequestParam("email") String email, @RequestParam("domain") String domain,
+                              @RequestParam("postnum") String postnum, @RequestParam("address") String address,
+                              @RequestParam("detailaddress") String detailaddress, MemberDTO dto) {
+        dto.setAddress(postnum+" "+address+" "+detailaddress);
+        dto.setEmail(email+domain);
+        dto.setPhone("010"+"-"+phonemid+"-"+phoneend);
+        dto.setAuth(2);
+        dto.setState("대기");
+        ms.insertm(dto);
+        return "redirect:/main";
     }
 
     @PostMapping("/idcheck")
@@ -82,31 +132,4 @@ public class MemberController {
             return "no";
         }
     }
-
-    @PostMapping(value = "/membersave")
-    public String membersave(@RequestParam("phonemid") int phonemid, @RequestParam("phoneend") int phoneend,
-                             @RequestParam("email") String email, @RequestParam("domain") String domain,
-                             @RequestParam("postnum") String postnum, @RequestParam("address") String address,
-                             @RequestParam("detailaddress") String detailaddress,
-                             MemberDTO dto) {
-        dto.setAddress(postnum+" "+address+" "+detailaddress);
-        dto.setEmail(email+domain);
-        dto.setPhone("010"+"-"+phonemid+"-"+phoneend);
-        dto.setAuth(1);
-        ms.insertm(dto);
-        return "redirect:/main";
-    }
-
-    @PostMapping(value = "/kakaosave")
-    public String kakaosave(@RequestParam("phonemid") int phonemid, @RequestParam("phoneend") int phoneend,
-                            @RequestParam("postnum") String postnum, @RequestParam("address") String address,
-                            @RequestParam("detailaddress") String detailaddress,
-                            MemberDTO dto) {
-        dto.setAddress(postnum+" "+address+" "+detailaddress);
-        dto.setPhone("010"+"-"+phonemid+"-"+phoneend);
-        dto.setAuth(1);
-        ms.insertm(dto);
-        return "redirect:/main";
-    }
-
 }

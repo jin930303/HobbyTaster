@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<body>
+<h1>회원가입</h1>
+    <div>
+        <button type="button" onclick="location.href='/memberinput'">일반회원가입</button>
+    </div>
+    <div>
+        <button type="button" onclick="location.href='/teacherinput'">강사회원가입</button>
+    </div>
+</form>
+</body>
+</html>

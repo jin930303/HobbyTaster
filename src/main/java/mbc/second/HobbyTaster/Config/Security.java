@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,10 +20,11 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class Security {
+public class Security{
     //DB 자료를 가져옴
     private UserDetailsService userDetailsService;
 
@@ -39,49 +41,62 @@ public class Security {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         /* @formatter:off */
         http
-                .csrf()
-                .ignoringRequestMatchers("/membersave", "/kakaosave",
-                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck", "/total_search","/csave")  // 특정 경로에서만 CSRF 비활성화
-                .and()
-                .authorizeRequests()
-                .requestMatchers("/", "/main", "/memberinput", "/membersave", "/kakaoinput", "/kakaosave", "/total_search",
-                        "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/csave",
-                        "/css/**", "/js/**", "/image/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .permitAll()
-                .loginPage("/login")
-                .loginProcessingUrl("/loginProcess")
-                .usernameParameter("id")
-                .passwordParameter("pw")
-                .defaultSuccessUrl("/")
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)throws IOException, ServletException {
-                        System.out.println("로그인 ID : "+authentication.getName());
-                        response.sendRedirect("/");
-                    }
-                })
-                .failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                        response.sendRedirect("/login");
-                    }
-                })
-                .and()
-                .logout()
-                .permitAll()
-                .logoutUrl("/logout")
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .deleteCookies("JSESSIONID")
-                .invalidateHttpSession(true)
-                .clearAuthentication(true);
+        .csrf()
+        .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave",
+                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search")  // 특정 경로에서만 CSRF 비활성화
+        .and()
+        .authorizeRequests()
+        .requestMatchers("/", "/main","/member",
+                    "/memberinput", "/membersave", "/kakaoinput", "/kakaosave", "/teacherinput", "/teachersave",
+                    "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search",
+                    "/css/**", "/js/**", "/image/**").permitAll()
+        .requestMatchers("/admin/**").hasAuthority("Admin")  // Admin 전용
+        .requestMatchers("/teacher/**").hasAuthority("Teacher") // Teacher 전용
+        .requestMatchers("/user/**").hasAuthority("Normal") // Normal 전용
+        .anyRequest().authenticated() // 그 외는 인증 필요
+        .and()
+        .formLogin()
+        .permitAll()
+        .loginPage("/login")
+        .loginProcessingUrl("/loginProcess")
+        .usernameParameter("id")
+        .passwordParameter("pw")
+        .successHandler(new AuthenticationSuccessHandler() {
+            @Override public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)throws IOException, ServletException {
+                System.out.println("로그인 ID : "+authentication.getName());
+                response.sendRedirect("/main");
+            }
+        })
+        .failureHandler(new AuthenticationFailureHandler() {
+            @Override
+            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+                String errorMessage;
+                if (exception instanceof BadCredentialsException) {
+                    errorMessage = exception.getMessage(); // Security에서 설정한 메시지
+                    System.out.println("FailureHandler Error Message: " + errorMessage);
+                }
+                else {
+                    errorMessage = "알 수 없는 오류가 발생했습니다.";
+                }
+                response.sendRedirect("/login?error=true&" +
+                        "=" + URLEncoder.encode(errorMessage, "UTF-8"));
+            }
+        })
+        .and()
+        .logout()
+        .permitAll()
+        .logoutUrl("/logout")
+        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .deleteCookies("JSESSIONID")
+        .invalidateHttpSession(true)
+        .clearAuthentication(true);
+
         return http.build();
         /* @formatter:on */
     }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
