@@ -39,4 +39,6 @@ public interface ClassService {
     List<ClassEntity> findByCat1(String cat1);
 
     List<ClassEntity> findByCat2(String cat2);
+
+    List<ClassEntity> category_product(String categories);
 }

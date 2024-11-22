@@ -104,5 +104,12 @@ public class ClassServiceImpl implements ClassService {
         return classRepository.findByCat2Containing(cat2);
     }
 
+
+    // 카테고리별 리스트 출력 ( PRODEUCT )
+    @Override
+    public List<ClassEntity> category_product(String categories) {
+        return findByCat1(categories);
+    }
+
 }
 

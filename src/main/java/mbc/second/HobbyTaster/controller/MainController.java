@@ -1,5 +1,6 @@
 package mbc.second.HobbyTaster.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import mbc.second.HobbyTaster.dto.Class.ClassDTO;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.service.Class.ClassInterface;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class MainController {
     @Autowired
@@ -141,5 +143,13 @@ public class MainController {
         return "main-search";
     }
 
+    @GetMapping(value = "/category_class")
+    public String main_category(@RequestParam("categories") String categories, Model mo) {
+
+        List<ClassEntity> category = classService.category_product(categories);
+        mo.addAttribute("category", category);
+
+        return "/class/category";
+    }
 
 }

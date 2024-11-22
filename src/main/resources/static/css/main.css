@@ -66,3 +66,36 @@ body {
     top: 0; /* nav 바로 아래로 표시 */
     /*background-color : rgb(255,255,255,0.8);*/
 }
+
+/* 카테고리 화면 */
+#category-list {
+    display: flex; /* flex-container 로 지정 */
+    flex-direction: row; /* flex-item들을 가로로 정렬*/
+    justify-content: space-between; /* 아이템 사이 간격 동일하게*/
+    gap: 20px; /* 사이 간격 지정 */
+    margin-top: 20px;
+    margin-left: 0;
+    padding: 0;
+    align-items: center; /* item들 가운데 정렬 */
+    list-style-type: none; /* 리스트 스타일 제거 */
+}
+/* 링크 스타일 */
+.Big-category ul li a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 기존 폰트 컬러 유지 */
+}
+.Big-category ul li a:hover {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 기존 폰트 컬러 유지 */
+}
+
+/* 카테고리 상자 ( 공예, 예술, 베이킹, 주류 ) */
+.category-box {
+    width: 200px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+    background-size: cover; /* 백그라운드 대충 맞게 커버 */
+    background-position: center; /* 백그라운드 가운데 정렬*/
+}
