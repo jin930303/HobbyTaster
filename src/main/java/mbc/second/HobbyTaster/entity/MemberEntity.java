@@ -41,8 +41,11 @@ public class MemberEntity {
     @Column
     int auth;
 
+    @Column
+    String state;
+
     @Builder
-    public MemberEntity(String id, String pw, String nickname, String name, String gender, String email, String phone, String address, int auth) {
+    public MemberEntity(String id, String pw, String nickname, String name, String gender, String email, String phone, String address, int auth, String state) {
         this.id = id;
         this.pw = pw;
         this.nickname = nickname;
@@ -52,5 +55,6 @@ public class MemberEntity {
         this.phone = phone;
         this.address = address;
         this.auth = auth;
+        this.state = state;
     }
 }
