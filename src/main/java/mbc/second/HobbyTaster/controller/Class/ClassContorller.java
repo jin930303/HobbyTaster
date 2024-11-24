@@ -87,7 +87,7 @@ public class ClassContorller {
         return "/class/cout";
     }
 
-    @GetMapping(value = "/detail")
+    @GetMapping(value = "/cadmindetail")
     public String class3(Model mo, @RequestParam("cnum") long cnum){
         classService.readcnt(cnum);
 
@@ -130,5 +130,14 @@ public class ClassContorller {
         return "redirect:/cout";
     }
 
+    @GetMapping(value = "/detail")
+    public String class8(Model mo, @RequestParam("num") long num){
+        classService.readcnt(num);
+
+        ClassEntity dto= classService.detail(num);
+        mo.addAttribute("dto",dto);
+
+        return "/class/detail";
+    }
 
 }

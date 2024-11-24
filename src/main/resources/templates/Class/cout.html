@@ -12,7 +12,7 @@
      </tr>
         <tr th:each="my:${list}">
            <td th:text="${my.cnum}"></td> <td th:text="${my.cat1}"></td> <td th:text="${my.cat2}"></td>
-            <td><a th:href="@{/detail(cnum=${my.cnum})}" th:text="${my.cname}"></a></td> <td th:text="${my.cround}"></td>
+            <td><a th:href="@{/cadmindetail(cnum=${my.cnum})}" th:text="${my.cname}"></a></td> <td th:text="${my.cround}"></td>
         <td th:text="${my.cteach}"></td> <td th:text="${my.cdate}"></td> <td th:text="${my.ctime}"></td> <td th:text="${my.cminute}"></td>
             <td th:text="${my.cadd}"></td> <td th:text="${my.cpl}"></td><td th:text="${my.cprice}"></td> <td th:text="${my.cstate}"></td>
             <td colspan="4">

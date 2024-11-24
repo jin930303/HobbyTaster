@@ -6,25 +6,29 @@
 <body>
 <div id="Left-container">
   <div id="imgcontainer">
-    <img th:src="@{/image/}+${}">
+    <img th:src="@{/image/}+${dto.cmimage}">
   </div>
   </div>
 
 <div id="Right-contianer">
   <div id="ctitle">
-    <a th:text="${}"></a>
+    <a th:text="${dto.cname}"></a>
   </div>
 <div id="cprice">
-  <a th:text="${}"></a>
+  <a th:text="${dto.cprice}"></a>
 </div>
   <div id="ctime">
-  <a th:text="${}"></a>
+  <a th:text="${dto.ctime}"></a>
 </div>
 </div>
 
 <div id="detail-container">
-
-
+<div id="detail-image">
+  <img th:src="@{/image/}+${dto.cdimage}">
+</div>
+<div id="detail-text">
+  <a th:text="${dto.cdtext}"></a>
+</div>
 </div>
 
 <div id="map-container">
