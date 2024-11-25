@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+
+<body>
+    <!--페이징, 디테일 페이지 링크
+    해당 페이지에서만 있는 1~10번 등의 번호, 수업 메인 이미지, 수업명, 강사명, 모집인원, 수업일자
+    동글동글했으면 좋겠음. 테두리를 살짝 오렌지색상 border 2정도, 한 페이지에 5씩, 페이지 넘기는게 슬라이드였으면 좋겠음. 가로 바 모양의 버튼식 링크, 가로바 x축 가운데 기준 위쪽이 이미지 아래쪽이 내용.-->
+    <div class="category-checking" th:each="category:${category}">
+        <p th:text="${category.cnum}"></p>
+    </div>
+</body>
+</html>
