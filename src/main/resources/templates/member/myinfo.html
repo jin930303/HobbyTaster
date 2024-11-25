@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<body>
+<div th:each="list:${list}">
+<div>
+    <h2>아이디</h2>
+    <p th:text="${list.id}"></p>
+</div>
+
+<div>
+    <h2>닉네임</h2>
+    <p th:text="${list.nickname}"></p>
+</div>
+
+<div>
+    <h2>이름</h2>
+    <p th:text="${list.name}"></p>
+</div>
+
+<div>
+    <h2>전화번호</h2>
+    <p th:text="${list.phone}"></p>
+</div>
+
+<div>
+    <h2>성별</h2>
+    <p th:text="${list.gender}"></p>
+</div>
+
+<div>
+    <h2>주소</h2>
+    <p th:text="${list.address}"></p>
+</div>
+
+    <div>
+        <button type="button" th:onclick="|location.href='@{/my/myinfoupdateview(id=${list.id})}'|">회원정보수정</button>
+    </div>
+    <div>
+        <button type="button" th:onclick="|location.href='@{/my/myinfodelete(id=${list.id})}'|">회원탈퇴</button>
+    </div>
+
+</div>
+</body>
+</html>

@@ -40,8 +40,14 @@
         <div class="container-login">
             <ul class="login-area">
                 <li>
-                    <a href="memberinput" sec:authorize="isAnonymous()"><span class="glyphicon glyphicon-user"></span> 회원가입</a>
-                    <a href="#" sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-log-in" th:text="${#authentication.name}+'님 반갑습니다.'">}></span></a>
+                    <a href="member" sec:authorize="isAnonymous()"><span class="glyphicon glyphicon-user"></span> 회원가입</a>
+
+                    <a href="#" sec:authorize="hasAuthority('Admin')"><span class="glyphicon glyphicon-log-in" th:text="'관리자님 반갑습니다.'"></span></a>
+                    <a href="#" sec:authorize="hasAuthority('Teacher')"><span class="glyphicon glyphicon-log-in" th:text="${#authentication.name}+' 강사님 반갑습니다.'"></span></a>
+                    <a href="#" sec:authorize="hasAuthority('Normal')"><span class="glyphicon glyphicon-log-in" th:text="${#authentication.name}+' 회원님 반갑습니다.'"></span></a>
+
+                    <a th:href="@{/my/myinfo(id=${#authentication.name})}" sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-user" th:text="'내 프로필'"></span></a>
+                    <a th:href="@{/admin/memberauth}" sec:authorize="hasAuthority('Admin')"><span class="glyphicon glyphicon-user" th:text="'회원관리'"></span></a>
                 </li>
 
                 <li>

@@ -1,8 +1,9 @@
-package mbc.second.HobbyTaster.service;
+package mbc.second.HobbyTaster.service.Member;
 
 import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -36,15 +37,25 @@ public class CustomDetailService implements UserDetailsService {
         MemberEntity memberEntity = memberRepository.findOneById(id);
         //findOneById의 정보를 가져와서 user에 담음
 
-        if (memberEntity != null) {
-            grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-            // USER 라는 역할을 넣어준다. SimpleGrantedAuthority는 GrantedAuthority를 상속받은 클래스,
-            // role를 USER로 설정(역할을 user로 설정)
-            return new User(memberEntity.getId(), memberEntity.getPw(), grantedAuthorities);
+        if (memberEntity.getState().equals("대기")) {
+            throw new BadCredentialsException("계정이 승인 대기 중입니다.");
         }
-        else {
+        else if (memberEntity.getState().equals("보류")) {
+            throw new BadCredentialsException("계정이 승인이 보류되었습니다.");
+        }
+
+        // 그 이후 auth에 따라 역할 설정
+        if (memberEntity.getAuth() == 1) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("Normal"));
+            return new User(memberEntity.getId(), memberEntity.getPw(), grantedAuthorities);
+        } else if (memberEntity.getAuth() == 2) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("Teacher"));
+            return new User(memberEntity.getId(), memberEntity.getPw(), grantedAuthorities);
+        } else if (memberEntity.getAuth() == 3) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("Admin"));
+            return new User(memberEntity.getId(), memberEntity.getPw(), grantedAuthorities);
+        } else {
             throw new UsernameNotFoundException("can not find User : " + id);
         }
     }
-
 }

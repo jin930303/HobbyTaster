@@ -36,9 +36,52 @@
 </div>
 
 <div id="review-container">
-
-
+  <form th:action="@{'/detail/review?num=' + ${dto.cnum}}" method="post" th:object="${review}" enctype="multipart/form-data">
+    <div>
+      <label for="title">제목:</label>
+      <input type="text" id="title" th:field="*{title}" required>
+    </div>
+    <div>
+      <label for="contents">내용:</label>
+      <textarea id="contents" th:field="*{contents}" required></textarea>
+    </div>
+    <div>
+      <label for="image1">이미지:</label>
+      <input type="file" id="image1" th:field="*{image1}" required>
+    </div>
+    <div>
+      <label for="revstar">평점:</label>
+      <input type="number" id="revstar" th:field="*{revstar}" min="0" max="5" required>
+      <input type="hidden" id="cnum" name="cnum" th:value="${dto.cnum}">
+    </div>
+    <button type="submit">리뷰 등록</button>
+  </form>
 </div>
 
+<h3>리뷰 목록</h3>
+<div th:if="${reviews.isEmpty()}">
+  <p>등록된 리뷰가 없습니다.</p>
+</div>
+<div th:each="review : ${reviews}">
+  <h4 th:text="${review.title}">리뷰 제목</h4>
+  <p th:text="${review.contents}">리뷰 내용</p>
+  <p><img th:src="@{/image/}+${review.image1}"></p>
+  <p>평점: <span th:text="${review.revstar}">0</span></p>
+  <p>작성자: <span th:text="${review.nickname}">닉네임</span></p>
+  <p><small th:text="${review.revdate}">작성 날짜</small></p>
+</div>
+
+<div th:each="comment : ${review.comments}">
+  <p><strong th:text="${comment.id}">작성자</strong>:</p>
+  <p th:text="${comment.comcontents}">내용</p>
+  <p><small th:text="${comment.comdate}">작성 날짜</small></p>
+</div>
+
+<!-- 댓글 작성 폼 -->
+<form th:action="@{/reviews/{revnum}/comment(revnum=${review.revnum})}" method="post">
+  <input type="text" name="id" placeholder="작성자 ID" required />
+  <textarea name="comcontents" placeholder="답글 내용" required></textarea>
+  <button type="submit">댓글 작성</button>
+</form>
 </body>
 </html>

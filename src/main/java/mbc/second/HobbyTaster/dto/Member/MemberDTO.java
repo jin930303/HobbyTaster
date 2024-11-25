@@ -19,6 +19,7 @@ public class MemberDTO {
     String phone;
     String address;
     int auth;
+    String state;
 
     public MemberEntity entity(BCryptPasswordEncoder encoder) {
         return MemberEntity.builder()
@@ -31,6 +32,7 @@ public class MemberDTO {
                 .phone(phone)
                 .address(address)
                 .auth(auth)
+                .state(state)
                 .build();
     }
 }

@@ -4,11 +4,15 @@ package mbc.second.HobbyTaster.controller.Class;
 import lombok.extern.slf4j.Slf4j;
 import mbc.second.HobbyTaster.dto.Class.ClassDTO;
 
+import mbc.second.HobbyTaster.dto.Review.ReviewDTO;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.entity.MemberEntity;
+import mbc.second.HobbyTaster.entity.review.ReviewEntity;
 import mbc.second.HobbyTaster.service.Class.ClassService;
 import mbc.second.HobbyTaster.service.Member.MemberService;
 
+import mbc.second.HobbyTaster.service.Review.CommentService;
+import mbc.second.HobbyTaster.service.Review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,15 +20,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +41,11 @@ public class ClassContorller {
     @Autowired
     MemberService memberService;
 
+    @Autowired
+    ReviewService reviewService;
 
+    @Autowired
+    CommentService commentService;
 
     String path = "C:\\mbc6\\spring_boot\\HobbyTaster\\src\\main\\resources\\static\\image";
 
@@ -137,7 +143,46 @@ public class ClassContorller {
         ClassEntity dto= classService.detail(num);
         mo.addAttribute("dto",dto);
 
+        List<ReviewEntity> reviews = reviewService.getReviewsByClassId(num);
+        mo.addAttribute("reviews", reviews);
+
+        // 새로운 리뷰 작성 폼 객체
+        mo.addAttribute("review", new ReviewEntity());
+
         return "/class/detail";
     }
 
+    @PostMapping(value = "/detail/review")
+    public String addReview(@RequestParam("num") long num,
+                            @ModelAttribute ReviewDTO reviewDTO, MultipartHttpServletRequest mul) throws IOException {
+        // 현재 로그인된 사용자 정보 가져오기
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        String id = userDetails.getUsername();
+        MemberEntity member = memberService.findbyid(id);
+
+        MultipartFile mf=mul.getFile("image1");
+        String fname=mf.getOriginalFilename();
+        UUID uu=UUID.randomUUID();
+        fname=uu.toString()+"-"+fname;
+        mf.transferTo(new File(path+"\\"+fname));
+        reviewDTO.setRimage1(fname);
+        reviewDTO.setId(id);
+        reviewDTO.setNickname(member.getNickname());
+        reviewDTO.setRevdate(LocalDate.now());
+
+        ReviewEntity reviewEntity=reviewDTO.reviewEntity();
+        reviewService.saveReview(reviewEntity);
+
+        return "redirect:/detail?num=" + num;
+    }
+
+    @PostMapping("/reviews/{revnum}/comment")
+    public String addComment(@PathVariable Long revnum,
+                             @RequestParam String id,
+                             @RequestParam String comcontents,
+                             Model model) {
+        commentService.saveComment(revnum, id, comcontents);
+        return "redirect:/reviews/" + revnum; // 해당 리뷰 페이지로 리다이렉트
+    }
 }

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
-    <title>로그인</title>
-</head>
 <body>
+<div th:if="${param.error}">
+    <div class="alert alert-danger" role="alert">
+        <span th:text="${param.message}"></span>
+    </div>
+</div>
 <div th:replace="~{top::menu}"></div>
 <div class="container">
     <h1>로그인</h1>
     <div th:if="${param.error}">사용자 이름 및 암호가 잘못되었습니다.</div>
-    <div th:if="${param.logout}">로그아웃 되었습니다.</div>
     <form th:action="@{/loginProcess}" method="post">
         <div class="form-group">
             <label for="id">아이디</label>
@@ -24,7 +25,7 @@
             <input type="button" onclick="location.href='/memberinput';"  class="btn btn-primary" value="회원가입" />
         </div>
         <div>
-            <a th:href="${kakaolocation}"><img th:src="@{/image/kakao_login.png}" width="150px" height="36.5px"></a>
+            <a th:href="${kakaolocation}"><img th:src="@{/image/kakao_login.png}"></a>
         </div>
     </form>
 </div>
