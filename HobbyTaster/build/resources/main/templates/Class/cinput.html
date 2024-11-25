@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+
+<body>
+<form action="csave" method="post">
+    <div>
+    <tr>
+        <th>수업명</th>
+        <td>
+            <input type="text" name="cname">
+        </td>
+    </tr>
+        <tr>
+            <th>회차</th>
+            <td>
+                <input type="number" name="cround">
+            </td>
+        </tr>
+    </div>
+
+</form>
+
+
+</body>
+
+</html>
