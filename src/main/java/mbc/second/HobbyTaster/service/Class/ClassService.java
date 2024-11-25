@@ -1,6 +1,9 @@
 package mbc.second.HobbyTaster.service.Class;
 
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -40,5 +43,7 @@ public interface ClassService {
 
     List<ClassEntity> findByCat2(String cat2);
 
-    List<ClassEntity> category_product(String categories);
+    List<ClassEntity> category_product(String categories, int startRow, int endRow);
+
+    int countByCategory(String categories);
 }

@@ -4,9 +4,14 @@ import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,12 +109,16 @@ public class ClassServiceImpl implements ClassService {
         return classRepository.findByCat2Containing(cat2);
     }
 
-
-    // 카테고리별 리스트 출력 ( PRODEUCT )
+    // 카테고리별 리스트 출력 ( PRODEUCT ) 및 페이징 처리
     @Override
-    public List<ClassEntity> category_product(String categories) {
-        return findByCat1(categories);
+    public List<ClassEntity> category_product(String categories, int startRow, int endRow) {
+        return classRepository.findByCat1WithRowNum(categories,startRow,endRow);
     }
+    @Override
+    public int countByCategory(String categories) {
+        return classRepository.countByCat1(categories);
+    }
+
 
 }
 

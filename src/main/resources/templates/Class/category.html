@@ -7,8 +7,44 @@
     <!--페이징, 디테일 페이지 링크
     해당 페이지에서만 있는 1~10번 등의 번호, 수업 메인 이미지, 수업명, 강사명, 모집인원, 수업일자
     동글동글했으면 좋겠음. 테두리를 살짝 오렌지색상 border 2정도, 한 페이지에 5씩, 페이지 넘기는게 슬라이드였으면 좋겠음. 가로 바 모양의 버튼식 링크, 가로바 x축 가운데 기준 위쪽이 이미지 아래쪽이 내용.-->
-    <div class="category-checking" th:each="category:${category}">
-        <p th:text="${category.cnum}"></p>
+    <div class="category-checking" >
+        <table style="border: 1px solid #333;">
+            <tr>
+                <th>번호</th>
+                <th>수업명</th>
+                <th>강사명</th>
+                <th>모집인원</th>
+                <th>수업일자</th>
+            </tr>
+            <tr th:each="paging:${categoryList}">
+                <td th:text="${paging.cnum}"></td>
+                <td th:text="${paging.cname}"></td>
+                <td th:text="${paging.cteach}"></td>
+                <td th:text="${paging.cpl}"></td>
+                <td th:text="${paging.cdate}"></td>
+            </tr>
+        </table>
+        <div>
+            <!-- 이전 버튼 -->
+            <span th:if="${currentPage > 0}">
+                <a th:href="@{/category_class(categories=${categories}, page=${currentPage - 1}, size=${pageSize})}">이전</a>
+            </span>
+
+            <!-- 페이지 번호 버튼 -->
+            <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
+                <a th:href="@{/category_class(categories=${categories}, page=${pageNum}, size=${pageSize})}"
+                   th:text="${pageNum + 1}"
+                   th:classappend="${pageNum == currentPage} ? 'active' : ''"></a>
+            </span>
+
+            <!-- 다음 버튼 -->
+            <span th:if="${currentPage < totalPages - 1}">
+                <a th:href="@{/category_class(categories=${categories}, page=${currentPage + 1}, size=${pageSize})}">다음</a>
+            </span>
+        </div>
+
+
     </div>
+
 </body>
 </html>

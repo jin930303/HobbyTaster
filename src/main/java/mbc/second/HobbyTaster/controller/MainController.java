@@ -6,6 +6,10 @@ import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.service.Class.ClassInterface;
 import mbc.second.HobbyTaster.service.Class.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -143,13 +147,45 @@ public class MainController {
         return "main-search";
     }
 
+    /*
     @GetMapping(value = "/category_class")
-    public String main_category(@RequestParam("categories") String categories, Model mo) {
+    public String main_category(@RequestParam("categories") String categories,
+                                Model mo) {
 
-        List<ClassEntity> category = classService.category_product(categories);
+        List<ClassEntity> category = classService.getlist(categories);
+
         mo.addAttribute("category", category);
+
+        return "/class/category";
+    }
+    */
+
+    @GetMapping("/category_class")
+    public String main_category(
+            @RequestParam("categories") String categories,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "4") int size,
+            Model model) {
+
+        // 페이징 범위 계산
+        int startRow = page * size + 1; // 가져올 데이터의 시작 위치
+        int endRow = startRow + size - 1; // 가져올 데이터의 끝 위치
+
+        List<ClassEntity> categoryList = classService.category_product(categories, startRow, endRow);
+        int totalDataCount = classService.countByCategory(categories);  // 전체 데이터 개수
+        int totalPages = (int) Math.ceil((double) totalDataCount / size);  // 전체 페이지 수 계산
+
+        model.addAttribute("categoryList", categoryList); // 데이터 리스트
+        model.addAttribute("currentPage", page); //현재 페이지
+        model.addAttribute("pageSize", size); // 페이지 크기
+        model.addAttribute("totalPages", totalPages); // 전체 페이지
+        model.addAttribute("categories", categories); // 카테고리 Cat1임
 
         return "/class/category";
     }
 
 }
+
+
+
+
