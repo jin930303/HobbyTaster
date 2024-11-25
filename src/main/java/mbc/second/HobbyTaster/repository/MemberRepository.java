@@ -1,12 +1,16 @@
 package mbc.second.HobbyTaster.repository;
 
+import mbc.second.HobbyTaster.dto.Member.MemberDTO;
 import mbc.second.HobbyTaster.entity.MemberEntity;
+import mbc.second.HobbyTaster.service.Member.MemberInterface;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, String> {
@@ -23,4 +27,29 @@ public interface MemberRepository extends JpaRepository<MemberEntity, String> {
 
     @Query(value = "select count(m.phone) from member m where m.phone=:fullphone", nativeQuery = true)
     int phonecheck(@Param("fullphone") String fullphone);
+
+
+    @Transactional
+    @Query(value = "select m.id, m.pw, m.nickname, m.name, m.gender, m.email, m.phone, m.address, m.auth, m.state " +
+            "from member m where m.id=:id", nativeQuery = true)
+    List<MemberInterface> myinfo(@Param("id") String id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update member m set m.email=:email, m.gender=:gender, m.name=:name, m.nickname=:nickname, " +
+            "m.phone=:phone, m.auth=:auth, m.state=:state, m.address=:address where m.id=:id", nativeQuery = true)
+    void updateinfo(@Param("id") String id,
+                    @Param("email") String email,
+                    @Param("gender") String gender,
+                    @Param("name") String name,
+                    @Param("nickname") String nickname,
+                    @Param("phone") String phone,
+                    @Param("auth") int auth,
+                    @Param("state") String state,
+                    @Param("address") String address);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update member m set m.state=:state where m.id=:id", nativeQuery = true)
+    void updatestate(@Param("id") String id, @Param("state") String state);
 }

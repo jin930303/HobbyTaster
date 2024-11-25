@@ -1,4 +1,4 @@
-package mbc.second.HobbyTaster.service;
+package mbc.second.HobbyTaster.service.Member;
 
 import mbc.second.HobbyTaster.entity.MemberEntity;
 import mbc.second.HobbyTaster.repository.MemberRepository;

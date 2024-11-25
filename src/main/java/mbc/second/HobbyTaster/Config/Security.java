@@ -41,17 +41,19 @@ public class Security{
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        
         /* @formatter:off */
         http
         .csrf()
         .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave",
-                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search")  // 특정 경로에서만 CSRF 비활성화
+                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview")  // 특정 경로에서만 CSRF 비활성화
         .and()
         .authorizeRequests()
         .requestMatchers("/", "/main","/member",
                     "/memberinput", "/membersave", "/kakaoinput", "/kakaosave", "/teacherinput", "/teachersave",
                     "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search",
                     "/css/**", "/js/**", "/image/**").permitAll()
+        .requestMatchers("/admin/**", "/my/**").hasAnyAuthority("Admin","Teacher","Normal")  // Admin 전용
         .requestMatchers("/admin/**").hasAuthority("Admin")  // Admin 전용
         .requestMatchers("/teacher/**").hasAuthority("Teacher") // Teacher 전용
         .requestMatchers("/user/**").hasAuthority("Normal") // Normal 전용
