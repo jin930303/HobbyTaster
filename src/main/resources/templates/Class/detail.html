@@ -70,5 +70,18 @@
   <p>작성자: <span th:text="${review.nickname}">닉네임</span></p>
   <p><small th:text="${review.revdate}">작성 날짜</small></p>
 </div>
+
+<div th:each="comment : ${review.comments}">
+  <p><strong th:text="${comment.id}">작성자</strong>:</p>
+  <p th:text="${comment.comcontents}">내용</p>
+  <p><small th:text="${comment.comdate}">작성 날짜</small></p>
+</div>
+
+<!-- 댓글 작성 폼 -->
+<form th:action="@{/reviews/{revnum}/comment(revnum=${review.revnum})}" method="post">
+  <input type="text" name="id" placeholder="작성자 ID" required />
+  <textarea name="comcontents" placeholder="답글 내용" required></textarea>
+  <button type="submit">댓글 작성</button>
+</form>
 </body>
 </html>

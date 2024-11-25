@@ -11,6 +11,7 @@ import mbc.second.HobbyTaster.entity.review.ReviewEntity;
 import mbc.second.HobbyTaster.service.Class.ClassService;
 import mbc.second.HobbyTaster.service.Member.MemberService;
 
+import mbc.second.HobbyTaster.service.Review.CommentService;
 import mbc.second.HobbyTaster.service.Review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,10 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -45,6 +43,9 @@ public class ClassContorller {
 
     @Autowired
     ReviewService reviewService;
+
+    @Autowired
+    CommentService commentService;
 
     String path = "C:\\mbc6\\spring_boot\\HobbyTaster\\src\\main\\resources\\static\\image";
 
@@ -176,4 +177,12 @@ public class ClassContorller {
         return "redirect:/detail?num=" + num;
     }
 
+    @PostMapping("/reviews/{revnum}/comment")
+    public String addComment(@PathVariable Long revnum,
+                             @RequestParam String id,
+                             @RequestParam String comcontents,
+                             Model model) {
+        commentService.saveComment(revnum, id, comcontents);
+        return "redirect:/reviews/" + revnum; // 해당 리뷰 페이지로 리다이렉트
+    }
 }
