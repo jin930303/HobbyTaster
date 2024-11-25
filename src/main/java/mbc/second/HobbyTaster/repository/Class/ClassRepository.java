@@ -1,4 +1,4 @@
-package mbc.second.HobbyTaster.repository;
+package mbc.second.HobbyTaster.repository.Class;
 
 import jakarta.transaction.Transactional;
 

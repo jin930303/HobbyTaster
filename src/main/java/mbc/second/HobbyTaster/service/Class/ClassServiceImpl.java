@@ -1,14 +1,12 @@
 package mbc.second.HobbyTaster.service.Class;
 
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
-import mbc.second.HobbyTaster.entity.MemberEntity;
-import mbc.second.HobbyTaster.repository.ClassRepository;
+import mbc.second.HobbyTaster.repository.Class.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClassServiceImpl implements ClassService {
