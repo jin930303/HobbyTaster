@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImp implements MemberService {
 
@@ -46,6 +48,31 @@ public class MemberServiceImp implements MemberService {
     public MemberEntity findbyid(String id) {
         return mr.findById(id)
                 .orElseThrow(() -> new RuntimeException("Member not found with id: " + id));
+    }
+
+    @Override
+    public void deleteinfo(String id) {
+        mr.deleteById(id);
+    }
+
+    @Override
+    public List<MemberInterface> infoout(String id) {
+        return mr.myinfo(id);
+    }
+
+    @Override
+    public void updateinfo(String id, String email, String gender, String name, String nickname, String phone, int auth, String state, String address) {
+        mr.updateinfo(id, email, gender, name, nickname, phone, auth,state, address);
+    }
+
+    @Override
+    public List<MemberEntity> allmember() {
+        return mr.findAll();
+    }
+
+    @Override
+    public void updatestate(String id, String state) {
+        mr.updatestate(id, state);
     }
 
 }
