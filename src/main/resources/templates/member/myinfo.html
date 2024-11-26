@@ -2,6 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{top::menu}"></div>
 <body>
+<a href="reserve_out">
+    <div>
+        <p>예약내역(진행중)</p>
+    </div>
+</a>
+
 <div th:each="list:${list}">
 <div>
     <h2>아이디</h2>

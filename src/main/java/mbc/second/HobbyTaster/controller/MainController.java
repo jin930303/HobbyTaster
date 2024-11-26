@@ -147,19 +147,6 @@ public class MainController {
         return "main-search";
     }
 
-    /*
-    @GetMapping(value = "/category_class")
-    public String main_category(@RequestParam("categories") String categories,
-                                Model mo) {
-
-        List<ClassEntity> category = classService.getlist(categories);
-
-        mo.addAttribute("category", category);
-
-        return "/class/category";
-    }
-    */
-
     @GetMapping("/category_class")
     public String main_category(
             @RequestParam("categories") String categories,
