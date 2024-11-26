@@ -227,16 +227,25 @@ public class ClassContorller {
     @PostMapping("/reviews/{revnum}/comment")
     public String addComment(@PathVariable("revnum") Long revnum,
                              @RequestParam("id") String id,
+                             @RequestParam("cnum") long num,
                              @RequestParam("comcontents") String comcontents,
                              Model model) {
         commentService.saveComment(revnum, id, comcontents);
-        return "redirect:/reviews/" + revnum; // 해당 리뷰 페이지로 리다이렉트
+
+        // 리뷰와 댓글 목록을 다시 모델에 추가하여, 댓글을 작성 후 해당 리뷰 페이지로 리다이렉트
+        List<CommentEntity> comments = commentService.getCommentsByReview(revnum);
+        model.addAttribute("comments", comments);
+
+        return "redirect:/detail?num=" + num; // 해당 리뷰 페이지로 리다이렉트
     }
 
     @GetMapping("/reviews/{revnum}/comments")
-    public String getComments(@PathVariable("revnum") Long revnum, Model model) {
+    public String getComments(@PathVariable("revnum") Long revnum, Model model,@RequestParam("cnum") long num) {
+        // 해당 리뷰의 댓글 목록을 가져와서 모델에 추가
         List<CommentEntity> comments = commentService.getCommentsByReview(revnum);
         model.addAttribute("comments", comments);
-        return "redirect:/reviews/" + revnum; // 댓글 목록을 표시할 템플릿
+        log.info("내용물 : "+comments);
+        // 리뷰 페이지로 이동
+        return "redirect:/detail?num=" + num; // 리뷰 페이지에서 댓글 목록을 보여줌
     }
 }
