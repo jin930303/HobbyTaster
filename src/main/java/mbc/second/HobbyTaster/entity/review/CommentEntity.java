@@ -1,7 +1,6 @@
 package mbc.second.HobbyTaster.entity.review;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ public class CommentEntity {
     long comnum;
 
     @Column
-    Integer revnum;
+    Long revnum;
 
     @Column
     String id;
@@ -31,8 +30,12 @@ public class CommentEntity {
     @Column
     LocalDate comdate;
 
+    @ManyToOne
+    @JoinColumn(name = "revnum", referencedColumnName = "revnum", insertable = false, updatable = false)
+    private ReviewEntity review;
+
     @Builder
-    public CommentEntity(long comnum, Integer revnum, String id, String comcontents, LocalDate comdate) {
+    public CommentEntity(long comnum, Long revnum, String id, String comcontents, LocalDate comdate) {
         this.comnum = comnum;
         this.revnum = revnum;
         this.id = id;

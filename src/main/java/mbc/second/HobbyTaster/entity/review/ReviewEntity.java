@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-
+import java.util.List;
 
 
 @Entity
@@ -51,6 +51,9 @@ public class ReviewEntity {
 
     @Column
     Integer revstar;
+
+    @OneToMany(mappedBy = "revnum", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments;
 
     @Builder
     public ReviewEntity(long revnum, Integer resnum, Integer cnum, String id, String nickname, String title, String contents, String image1, String image2, String image3, LocalDate revdate, Integer revstar) {
