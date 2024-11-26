@@ -202,4 +202,65 @@ public class MemberController {
         ms.updatestate(id, state);
         return "redirect:/admin/memberauth";
     }
+
+    @GetMapping(value = "/findidview")
+    public String findidview() {
+        return "member/findid";
+    }
+
+    @PostMapping(value = "/findidemail")
+    public String findidemail(@RequestParam("email") String email, @RequestParam("domain") String domain, Model mo) {
+        String fullemail=email+domain;
+        int count=ms.emailcheck(fullemail);
+        if(count>0) {
+            String findid=ms.findidemail(fullemail);
+            mo.addAttribute("findid", findid);
+            return "member/findidresult";
+        }
+        else {
+            return "redirect:/findidview";
+        }
+    }
+
+    @PostMapping(value = "/findidphone")
+    public String findidphone(@RequestParam("phonemid") String phonemid, @RequestParam("phoneend") String phoneend, Model mo) {
+        String fullphone="010-"+phonemid+"-"+phoneend;
+        int count=ms.phonecheck(fullphone);
+        if(count>0) {
+            String findid=ms.findidphone(fullphone);
+            mo.addAttribute("findid", findid);
+            return "member/findidresult";
+        }
+        else {
+            return "redirect:/findidview";
+        }
+    }
+
+    @GetMapping(value = "/findpwview")
+    public String findpwview() {
+        return "member/findpw";
+    }
+
+    @PostMapping(value = "/findpw")
+    public String findpw(Model mo, @RequestParam("id") String id,
+                         @RequestParam("phonemid") String phonemid, @RequestParam("phoneend") String phoneend,
+                         @RequestParam("email") String email, @RequestParam("domain") String domain) {
+        String fullphone="010-"+phonemid+"-"+phoneend;
+        String fullemail=email+domain;
+        int count=ms.pwcheck(id,fullemail,fullphone);
+        if(count>0) {
+            mo.addAttribute("id", id);
+            return "member/pwupdateview";
+        }
+        else {
+            return "redirect:/findpwview";
+        }
+    }
+
+    @PostMapping(value = "/updatepw")
+    public String updatepw(@RequestParam("id") String id, @RequestParam("pw") String pw) {
+        ms.pwupdate(id, pw);
+        return "redirect:/login";
+    }
+
 }

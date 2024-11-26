@@ -30,4 +30,12 @@ public interface MemberService {
     List<MemberEntity> allmember();
 
     void updatestate(String id, String state);
+
+    String findidemail(String fullemail);
+
+    String findidphone(String fullphone);
+
+    int pwcheck(String id, String fullemail, String fullphone);
+
+    void pwupdate(String id, String pw);
 }

@@ -28,7 +28,6 @@ public interface MemberRepository extends JpaRepository<MemberEntity, String> {
     @Query(value = "select count(m.phone) from member m where m.phone=:fullphone", nativeQuery = true)
     int phonecheck(@Param("fullphone") String fullphone);
 
-
     @Transactional
     @Query(value = "select m.id, m.pw, m.nickname, m.name, m.gender, m.email, m.phone, m.address, m.auth, m.state " +
             "from member m where m.id=:id", nativeQuery = true)
@@ -52,4 +51,18 @@ public interface MemberRepository extends JpaRepository<MemberEntity, String> {
     @Modifying
     @Query(value = "update member m set m.state=:state where m.id=:id", nativeQuery = true)
     void updatestate(@Param("id") String id, @Param("state") String state);
+
+    @Query(value = "select count(m.id) from member m where m.id=:id and m.email=:fullemail and m.phone=:fullphone", nativeQuery = true)
+    int pwcheck(@Param("id") String id, @Param("fullemail") String fullemail, @Param("fullphone") String fullphone);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update member m set m.pw=:pwbcryt where m.id=:id", nativeQuery = true)
+    void pwupdate(@Param("id") String id, @Param("pwbcryt") String pwbcryt);
+
+    @Query(value = "select m.id from member m where m.email=:fullemail", nativeQuery = true)
+    String findidemail(@Param("fullemail") String fullemail);
+
+    @Query(value = "select m.id from member m where m.phone=:fullphone", nativeQuery = true)
+    String findidphone(@Param("fullphone") String fullphone);
 }
