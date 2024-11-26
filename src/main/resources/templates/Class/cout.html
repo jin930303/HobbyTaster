@@ -19,6 +19,7 @@
                 <a th:href="@{cstart(cnum=${my.cnum})}">진행</a>
                 <a th:href="@{creturn(cnum=${my.cnum})}">반려</a>
                 <a th:href="@{cfinish(cnum=${my.cnum})}">종료</a>
+                <a th:href="@{cupdate(cnum=${my.cnum})}">수정</a>
                 <a th:href="@{cdelete(cnum=${my.cnum},cdimage=${my.cdimage},cmimage=${my.cmimage})}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
             </td>
         </tr>
