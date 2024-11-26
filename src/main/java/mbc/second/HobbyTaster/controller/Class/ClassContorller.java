@@ -48,7 +48,7 @@ public class ClassContorller {
     @Autowired
     CommentService commentService;
 
-    String path = "C:\\mbc6\\spring_boot\\HobbyTaster\\src\\main\\resources\\static\\image";
+    String path = "C:\\●mbc\\spring boot\\HobbyTaster\\src\\main\\resources\\static\\image";
 
     @GetMapping(value = "cinput")
     public String class0(Model mo){
@@ -233,10 +233,10 @@ public class ClassContorller {
         return "redirect:/reviews/" + revnum; // 해당 리뷰 페이지로 리다이렉트
     }
 
-    @GetMapping("/reviews/{revnum}/comments")
-    public String getComments(@PathVariable("revnum") Long revnum, Model model) {
-        List<CommentEntity> comments = commentService.getCommentsByReview(revnum);
-        model.addAttribute("comments", comments);
-        return "redirect:/reviews/" + revnum; // 댓글 목록을 표시할 템플릿
-    }
+//    @GetMapping("/reviews/{revnum}/comments")
+//    public String getComments(@PathVariable("revnum") Long revnum, Model model) {
+//        List<CommentEntity> comments = commentService.getCommentsByReview(revnum);
+//        model.addAttribute("comments", comments);
+//        return "redirect:/reviews/" + revnum; // 댓글 목록을 표시할 템플릿
+//    }
 }
