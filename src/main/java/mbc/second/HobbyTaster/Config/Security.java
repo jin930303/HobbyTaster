@@ -46,18 +46,19 @@ public class Security{
         http
         .csrf()
         .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave","/csave",
-                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview","*/reviews",
+                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview","/reviews","/cupdate1",
                 "/findidemail", "/findidphone","/findpw", "/updatepw")  // 특정 경로에서만 CSRF 비활성화
         .and()
         .authorizeRequests()
-        .requestMatchers("/", "/main","/member",
-                    "/memberinput", "/membersave", "/kakaoinput", "/kakaosave", "/teacherinput", "/teachersave","/csave",
-                    "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search","*/reviews",
+        .requestMatchers("/", "/main","/member","/memberinput", "/membersave",
+                    "/kakaoinput", "/kakaosave", "/teacherinput", "/teachersave",
+                    "/csave","/cupdate","/cupdate1",
+                    "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search","/reviews",
                     "/findidview", "/findidemail", "/findidphone", "/findpwview", "/findpw", "/updatepw",
                     "/css/**", "/js/**", "/image/**").permitAll()
         .requestMatchers("/my/**").hasAnyAuthority("Admin","Teacher","Normal")  // Admin 전용
-        .requestMatchers("/admin/**").hasAuthority("Admin")  // Admin 전용
-        .requestMatchers("/teacher/**").hasAuthority("Teacher") // Teacher 전용
+        .requestMatchers("/admin/**", "/reviews/*/comment").hasAuthority("Admin")  // Admin 전용
+        .requestMatchers("/teacher/**", "/reviews/*/comment").hasAuthority("Teacher") // Teacher 전용
         .requestMatchers("/user/**").hasAuthority("Normal") // Normal 전용
         .anyRequest().authenticated() // 그 외는 인증 필요
         .and()
