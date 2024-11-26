@@ -45,12 +45,12 @@ public class Security{
         /* @formatter:off */
         http
         .csrf()
-        .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave",
+        .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave","/csave",
                 "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview","*/reviews")  // 특정 경로에서만 CSRF 비활성화
         .and()
         .authorizeRequests()
         .requestMatchers("/", "/main","/member",
-                    "/memberinput", "/membersave", "/kakaoinput", "/kakaosave", "/teacherinput", "/teachersave",
+                    "/memberinput", "/membersave", "/kakaoinput", "/kakaosave", "/teacherinput", "/teachersave","/csave",
                     "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search","*/reviews",
                     "/css/**", "/js/**", "/image/**").permitAll()
         .requestMatchers("/admin/**", "/my/**").hasAnyAuthority("Admin","Teacher","Normal")  // Admin 전용
