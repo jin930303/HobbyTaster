@@ -246,6 +246,6 @@ public class ClassContorller {
         model.addAttribute("comments", comments);
         log.info("내용물 : "+comments);
         // 리뷰 페이지로 이동
-        return "redirect:/detail?num=" + num; // 리뷰 페이지에서 댓글 목록을 보여줌
+        return "redirect:/detail?num=" + num; // 리뷰 페이지에서 댓글 목록을 보여줌ㅇ
     }
 }
