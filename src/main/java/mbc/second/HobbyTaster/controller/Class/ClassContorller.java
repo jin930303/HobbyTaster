@@ -7,6 +7,7 @@ import mbc.second.HobbyTaster.dto.Class.ClassDTO;
 import mbc.second.HobbyTaster.dto.Review.ReviewDTO;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.entity.MemberEntity;
+import mbc.second.HobbyTaster.entity.review.CommentEntity;
 import mbc.second.HobbyTaster.entity.review.ReviewEntity;
 import mbc.second.HobbyTaster.service.Class.ClassService;
 import mbc.second.HobbyTaster.service.Member.MemberService;
@@ -103,6 +104,48 @@ public class ClassContorller {
         return "/class/cadmindetail";
     }
 
+    @GetMapping(value = "/cupdate")
+    public String class9(Model mo, @RequestParam("cnum") long cnum){
+       ClassEntity entity= classService.cfind(cnum);
+       mo.addAttribute("entity",entity);
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String id = ((UserDetails) principal).getUsername();
+        MemberEntity dto=memberService.findbyid(id);
+
+        mo.addAttribute("dto",dto);
+
+        return "/class/cupdate";
+    }
+
+    @PostMapping(value = "cupdate1")
+    public String class10(@ModelAttribute("classDTO") ClassDTO classDTO, MultipartHttpServletRequest mul)throws IOException {
+
+        classDTO.mergeAddress();
+
+        MultipartFile mf1= mul.getFile("cmimage");
+        MultipartFile mf2= mul.getFile("cdimage");
+
+        String fname1= mf1.getOriginalFilename();
+        String fname2= mf2.getOriginalFilename();
+
+        UUID uu=UUID.randomUUID();
+        fname1=uu.toString()+"-"+fname1;
+        fname2=uu.toString()+"-"+fname2;
+
+        mf1.transferTo(new File(path+"\\"+fname1));
+        mf2.transferTo(new File(path+"\\"+fname2));
+
+        classDTO.setCmimage1(fname1);
+        classDTO.setCdimage1(fname2);
+        ClassEntity centity=classDTO.centity();
+        classService.cupdate(centity);
+
+        return "redirect:/";
+    }
+
+
     @GetMapping(value = "/cstart")
     public String class4(Model mo, @RequestParam("cnum") long cnum){
         classService.start(cnum);
@@ -149,6 +192,10 @@ public class ClassContorller {
         // 새로운 리뷰 작성 폼 객체
         mo.addAttribute("review", new ReviewEntity());
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        String id = userDetails.getUsername();
+        mo.addAttribute("id",id);
         return "/class/detail";
     }
 
@@ -178,11 +225,18 @@ public class ClassContorller {
     }
 
     @PostMapping("/reviews/{revnum}/comment")
-    public String addComment(@PathVariable Long revnum,
-                             @RequestParam String id,
-                             @RequestParam String comcontents,
+    public String addComment(@PathVariable("revnum") Long revnum,
+                             @RequestParam("id") String id,
+                             @RequestParam("comcontents") String comcontents,
                              Model model) {
         commentService.saveComment(revnum, id, comcontents);
         return "redirect:/reviews/" + revnum; // 해당 리뷰 페이지로 리다이렉트
+    }
+
+    @GetMapping("/reviews/{revnum}/comments")
+    public String getComments(@PathVariable("revnum") Long revnum, Model model) {
+        List<CommentEntity> comments = commentService.getCommentsByReview(revnum);
+        model.addAttribute("comments", comments);
+        return "redirect:/reviews/" + revnum; // 댓글 목록을 표시할 템플릿
     }
 }
