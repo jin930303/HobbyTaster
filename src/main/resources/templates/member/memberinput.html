@@ -6,6 +6,8 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" th:src="@{/js/member.check.js}"></script>
 <script type="text/javascript" th:src="@{/js/member.address.js}"></script>
+<script type="text/javascript" th:src="@{/js/member.email.custom.js}"></script>
+<script type="text/javascript" th:src="@{/js/member.pwcheck.js}"></script>
 <body>
 <h1>일반회원가입</h1>
 <form th:action="@{/membersave}" method="post" onsubmit="return validateForm()">
@@ -26,6 +28,7 @@
         <label for="pwcf">비밀번호 확인</label>
         <input type="password" name="pwcf" id="pwcf">
         <span id="pwcfError" style="color:red;"></span>
+        <button type="button" name="pwcfcf" id="pwcfcf" onclick="checkPasswordMatch()">비밀번호 일치확인</button>
     </div>
 
     <div>

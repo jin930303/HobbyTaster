@@ -46,8 +46,7 @@ public class MemberServiceImp implements MemberService {
 
     @Override
     public MemberEntity findbyid(String id) {
-        return mr.findById(id)
-                .orElseThrow(() -> new RuntimeException("Member not found with id: " + id));
+        return mr.findById(id).orElse(null);
     }
 
     @Override
@@ -73,6 +72,27 @@ public class MemberServiceImp implements MemberService {
     @Override
     public void updatestate(String id, String state) {
         mr.updatestate(id, state);
+    }
+
+    @Override
+    public String findidemail(String fullemail) {
+        return mr.findidemail(fullemail);
+    }
+
+    @Override
+    public String findidphone(String fullphone) {
+        return mr.findidphone(fullphone);
+    }
+
+    @Override
+    public int pwcheck(String id, String fullemail, String fullphone) {
+        return mr.pwcheck(id,fullemail, fullphone);
+    }
+
+    @Override
+    public void pwupdate(String id, String pw) {
+        String pwbcryt=bCryptPasswordEncoder.encode(pw);
+        mr.pwupdate(id, pwbcryt);
     }
 
 }
