@@ -1,7 +1,7 @@
 package mbc.second.HobbyTaster.service.Member;
 
 import mbc.second.HobbyTaster.dto.Member.MemberDTO;
-import mbc.second.HobbyTaster.entity.MemberEntity;
+import mbc.second.HobbyTaster.entity.Member.MemberEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

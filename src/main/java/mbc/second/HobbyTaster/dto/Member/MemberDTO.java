@@ -3,7 +3,7 @@ package mbc.second.HobbyTaster.dto.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mbc.second.HobbyTaster.entity.MemberEntity;
+import mbc.second.HobbyTaster.entity.Member.MemberEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @NoArgsConstructor

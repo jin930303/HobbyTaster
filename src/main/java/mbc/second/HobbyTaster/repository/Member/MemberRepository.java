@@ -1,7 +1,6 @@
-package mbc.second.HobbyTaster.repository;
+package mbc.second.HobbyTaster.repository.Member;
 
-import mbc.second.HobbyTaster.dto.Member.MemberDTO;
-import mbc.second.HobbyTaster.entity.MemberEntity;
+import mbc.second.HobbyTaster.entity.Member.MemberEntity;
 import mbc.second.HobbyTaster.service.Member.MemberInterface;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

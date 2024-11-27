@@ -1,4 +1,4 @@
-package mbc.second.HobbyTaster.entity;
+package mbc.second.HobbyTaster.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,8 +1,8 @@
 package mbc.second.HobbyTaster.service.Member;
 
 import mbc.second.HobbyTaster.dto.Member.MemberDTO;
-import mbc.second.HobbyTaster.entity.MemberEntity;
-import mbc.second.HobbyTaster.repository.MemberRepository;
+import mbc.second.HobbyTaster.entity.Member.MemberEntity;
+import mbc.second.HobbyTaster.repository.Member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

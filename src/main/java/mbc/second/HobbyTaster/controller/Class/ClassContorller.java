@@ -6,7 +6,7 @@ import mbc.second.HobbyTaster.dto.Class.ClassDTO;
 
 import mbc.second.HobbyTaster.dto.Review.ReviewDTO;
 import mbc.second.HobbyTaster.entity.Class.ClassEntity;
-import mbc.second.HobbyTaster.entity.MemberEntity;
+import mbc.second.HobbyTaster.entity.Member.MemberEntity;
 import mbc.second.HobbyTaster.entity.review.CommentEntity;
 import mbc.second.HobbyTaster.entity.review.ReviewEntity;
 import mbc.second.HobbyTaster.service.Class.ClassService;

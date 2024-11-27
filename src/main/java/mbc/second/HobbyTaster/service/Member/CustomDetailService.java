@@ -1,7 +1,7 @@
 package mbc.second.HobbyTaster.service.Member;
 
-import mbc.second.HobbyTaster.entity.MemberEntity;
-import mbc.second.HobbyTaster.repository.MemberRepository;
+import mbc.second.HobbyTaster.entity.Member.MemberEntity;
+import mbc.second.HobbyTaster.repository.Member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
