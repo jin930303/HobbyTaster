@@ -14,7 +14,6 @@ public class ClassServiceImpl implements ClassService {
     @Autowired
     ClassRepository classRepository;
 
-
     @Override
     public void cinsert(ClassEntity centity) {
         classRepository.save(centity);
@@ -33,7 +32,6 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public void start(long cnum) {
         classRepository.start(cnum);
-
     }
 
     @Override
@@ -57,7 +55,6 @@ public class ClassServiceImpl implements ClassService {
     }
     
     //메인 페이지
-
     @Override
     public List<ClassInterface> categoryclass(String cat1, String cat2) {
         return classRepository.categoryclass(cat1, cat2);
@@ -69,21 +66,25 @@ public class ClassServiceImpl implements ClassService {
         IgnoreCase: 대소문자 무시.
         And, Or: 논리 조건 연결.
     */
+
     // 검색어만 입력
     @Override
     public List<ClassEntity> findByCnameAndCteach(String totSearch) {
         return classRepository.findByCnameContainingIgnoreCaseOrCteachContainingIgnoreCase(totSearch, totSearch);
     }
+
     // 날짜만 선택
     @Override
     public List<ClassEntity> findByCdate(LocalDate totDay) {
         return classRepository.findByCdate(totDay);
     }
+
     // 검색어, 날짜 다중 선택
     @Override
     public List<ClassEntity> findByCnameOrCteachAndCdate(String totSearch, LocalDate totDay) {
         return classRepository.findByCdateAndCnameContainingIgnoreCaseOrCteachContainingIgnoreCase(totDay, totSearch, totSearch);
     }
+
     // 소요시간 선택
     @Override
     public List<ClassEntity> findByCtime(String time) {
@@ -107,6 +108,7 @@ public class ClassServiceImpl implements ClassService {
     public List<ClassEntity> category_product(String categories, int startRow, int endRow) {
         return classRepository.findByCat1WithRowNum(categories,startRow,endRow);
     }
+
     @Override
     public int countByCategory(String categories) {
         return classRepository.countByCat1(categories);
@@ -121,7 +123,5 @@ public class ClassServiceImpl implements ClassService {
     public void cupdate(ClassEntity centity) {
         classRepository.save(centity);
     }
-
-
 }
 

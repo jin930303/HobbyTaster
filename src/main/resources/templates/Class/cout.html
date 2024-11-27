@@ -12,15 +12,14 @@
      </tr>
         <tr th:each="my:${list}">
            <td th:text="${my.cnum}"></td> <td th:text="${my.cat1}"></td> <td th:text="${my.cat2}"></td>
-            <td><a th:href="@{/cadmindetail(cnum=${my.cnum})}" th:text="${my.cname}"></a></td> <td th:text="${my.cround}"></td>
+            <td><a th:href="@{/admin/cadmindetail(cnum=${my.cnum})}" th:text="${my.cname}"></a></td> <td th:text="${my.cround}"></td>
         <td th:text="${my.cteach}"></td> <td th:text="${my.cdate}"></td> <td th:text="${my.ctime}"></td> <td th:text="${my.cminute}"></td>
             <td th:text="${my.cadd}"></td> <td th:text="${my.cpl}"></td><td th:text="${my.cprice}"></td> <td th:text="${my.cstate}"></td>
             <td colspan="4">
-                <a th:href="@{cstart(cnum=${my.cnum})}">진행</a>
-                <a th:href="@{creturn(cnum=${my.cnum})}">반려</a>
-                <a th:href="@{cfinish(cnum=${my.cnum})}">종료</a>
-                <a th:href="@{cupdate(cnum=${my.cnum})}">수정</a>
-                <a th:href="@{cdelete(cnum=${my.cnum},cdimage=${my.cdimage},cmimage=${my.cmimage})}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+                <a th:href="@{/admin/cstart(cnum=${my.cnum})}">진행</a>
+                <a th:href="@{/admin/creturn(cnum=${my.cnum})}">반려</a>
+                <a th:href="@{/admin/cfinish(cnum=${my.cnum})}">종료</a>
+                <a th:href="@{/adminteach/cdelete(cnum=${my.cnum},cdimage=${my.cdimage},cmimage=${my.cmimage})}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
             </td>
         </tr>
     </table>

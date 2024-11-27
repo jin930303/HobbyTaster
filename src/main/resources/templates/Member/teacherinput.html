@@ -20,13 +20,13 @@
 
     <div>
         <label for="pw">비밀번호</label>
-        <input type="password" name="pw" id="pw">
+        <input type="password" name="pw" id="pw" required>
         <span id="pwError" style="color:red;"></span>
     </div>
 
     <div>
         <label for="pwcf">비밀번호 확인</label>
-        <input type="password" name="pwcf" id="pwcf">
+        <input type="password" name="pwcf" id="pwcf" required>
         <span id="pwcfError" style="color:red;"></span>
         <button type="button" name="pwcfcf" id="pwcfcf" onclick="checkPasswordMatch()">비밀번호 일치확인</button>
     </div>

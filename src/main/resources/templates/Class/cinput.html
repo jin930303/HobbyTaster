@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-<form action="csave" method="post" enctype="multipart/form-data">
+<form th:action="@{/teacher/csave}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="cstate" id="cstate" th:value="대기" >
     <table>
         <tr>

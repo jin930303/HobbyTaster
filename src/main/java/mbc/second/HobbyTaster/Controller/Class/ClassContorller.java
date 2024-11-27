@@ -50,7 +50,7 @@ public class ClassContorller {
 
     String path = "C:\\mbc6\\spring_boot\\HobbyTaster\\src\\main\\resources\\static\\image";
 
-    @GetMapping(value = "cinput")
+    @GetMapping(value = "/teacher/cinput")
     public String class0(Model mo){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
@@ -58,10 +58,10 @@ public class ClassContorller {
         MemberEntity dto=memberService.findbyid(id);
         log.info("확인 : "+dto);
         mo.addAttribute("dto",dto);
-        return "/class/cinput";
+        return "class/cinput";
     }
 
-    @PostMapping(value = "csave")
+    @PostMapping(value = "/teacher/csave")
     public String class1(@ModelAttribute("classDTO") ClassDTO classDTO, MultipartHttpServletRequest mul)throws IOException {
 
         classDTO.mergeAddress();
@@ -87,24 +87,24 @@ public class ClassContorller {
         return "redirect:/";
     }
 
-    @GetMapping(value = "cout")
+    @GetMapping(value = "/admin/cout")
     public String class2(Model mo){
         List<ClassEntity>list= classService.out();
         mo.addAttribute("list",list);
-        return "/class/cout";
+        return "class/cout";
     }
 
-    @GetMapping(value = "/cadmindetail")
+    @GetMapping(value = "/admin/cadmindetail")
     public String class3(Model mo, @RequestParam("cnum") long cnum){
         classService.readcnt(cnum);
 
         ClassEntity dto= classService.detail(cnum);
         mo.addAttribute("dto",dto);
 
-        return "/class/cadmindetail";
+        return "class/cadmindetail";
     }
 
-    @GetMapping(value = "/cupdate")
+    @GetMapping(value = "/teacher/cupdate")
     public String class9(Model mo, @RequestParam("cnum") long cnum){
        ClassEntity entity= classService.cfind(cnum);
        mo.addAttribute("entity",entity);
@@ -116,10 +116,10 @@ public class ClassContorller {
 
         mo.addAttribute("dto",dto);
 
-        return "/class/cupdate";
+        return "class/cupdate";
     }
 
-    @PostMapping(value = "cupdate1")
+    @PostMapping(value = "/teacher/cupdate1")
     public String class10(@ModelAttribute("classDTO") ClassDTO classDTO, MultipartHttpServletRequest mul)throws IOException {
 
         classDTO.mergeAddress();
@@ -146,28 +146,28 @@ public class ClassContorller {
     }
 
 
-    @GetMapping(value = "/cstart")
+    @GetMapping(value = "/admin/cstart")
     public String class4(Model mo, @RequestParam("cnum") long cnum){
         classService.start(cnum);
 
-        return "redirect:/cout";
+        return "redirect:/admin/cout";
     }
 
-    @GetMapping(value = "/creturn")
+    @GetMapping(value = "/admin/creturn")
     public String class5(Model mo, @RequestParam("cnum") long cnum){
         classService.creturn(cnum);
 
-        return "redirect:/cout";
+        return "redirect:/admin/cout";
     }
 
-    @GetMapping(value = "/cfinish")
+    @GetMapping(value = "/admin/cfinish")
     public String class6(Model mo, @RequestParam("cnum") long cnum){
         classService.cfinish(cnum);
 
-        return "redirect:/cout";
+        return "redirect:/admin/cout";
     }
 
-    @GetMapping(value = "/cdelete")
+    @GetMapping(value = "/adminteach/cdelete")
     public String class7(Model mo, @RequestParam("cnum") long cnum,@RequestParam("cdimage") String cdimage,@RequestParam("cmimage")String cmimage){
 
         classService.cdelete(cnum);
@@ -176,7 +176,7 @@ public class ClassContorller {
         f1.delete();
         f2.delete();
 
-        return "redirect:/cout";
+        return "redirect:/admin/cout";
     }
 
     @GetMapping(value = "/detail")
@@ -196,7 +196,7 @@ public class ClassContorller {
         UserDetails userDetails = (UserDetails) principal;
         String id = userDetails.getUsername();
         mo.addAttribute("id",id);
-        return "/class/detail";
+        return "class/detail";
     }
 
     @PostMapping(value = "/detail/review")
@@ -222,30 +222,5 @@ public class ClassContorller {
         reviewService.saveReview(reviewEntity);
 
         return "redirect:/detail?num=" + num;
-    }
-
-    @PostMapping("/reviews/{revnum}/comment")
-    public String addComment(@PathVariable("revnum") Long revnum,
-                             @RequestParam("id") String id,
-                             @RequestParam("cnum") long num,
-                             @RequestParam("comcontents") String comcontents,
-                             Model model) {
-        commentService.saveComment(revnum, id, comcontents);
-
-        // 리뷰와 댓글 목록을 다시 모델에 추가하여, 댓글을 작성 후 해당 리뷰 페이지로 리다이렉트
-        List<CommentEntity> comments = commentService.getCommentsByReview(revnum);
-        model.addAttribute("comments", comments);
-
-        return "redirect:/detail?num=" + num; // 해당 리뷰 페이지로 리다이렉트
-    }
-
-    @GetMapping("/reviews/{revnum}/comments")
-    public String getComments(@PathVariable("revnum") Long revnum, Model model,@RequestParam("cnum") long num) {
-        // 해당 리뷰의 댓글 목록을 가져와서 모델에 추가
-        List<CommentEntity> comments = commentService.getCommentsByReview(revnum);
-        model.addAttribute("comments", comments);
-        log.info("내용물 : "+comments);
-        // 리뷰 페이지로 이동
-        return "redirect:/detail?num=" + num; // 리뷰 페이지에서 댓글 목록을 보여줌ㅇ
     }
 }

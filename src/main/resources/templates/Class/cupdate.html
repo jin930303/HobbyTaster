@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-  <form action="cupdate1" method="post" enctype="multipart/form-data">
+  <form th:action="@{/teacher/cupdate1}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="cnum" id="cnum" th:value="${entity.cnum}" >
     <input type="hidden" name="cstate" id="cstate" th:value="대기" >
     <table>

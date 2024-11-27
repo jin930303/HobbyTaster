@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface ClassService {
 
-
     void cinsert(ClassEntity centity);
 
     List<ClassEntity> out();

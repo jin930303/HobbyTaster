@@ -3,8 +3,10 @@ package mbc.second.HobbyTaster.Controller.Member;
 import lombok.extern.slf4j.Slf4j;
 import mbc.second.HobbyTaster.DTO.Member.KakaoInfoDTO;
 import mbc.second.HobbyTaster.DTO.Member.MemberDTO;
+import mbc.second.HobbyTaster.Entity.Class.ClassEntity;
 import mbc.second.HobbyTaster.Entity.Member.MemberEntity;
 import mbc.second.HobbyTaster.Repository.Member.MemberRepository;
+import mbc.second.HobbyTaster.Service.Class.ClassService;
 import mbc.second.HobbyTaster.Service.Member.KakaoLoginService;
 import mbc.second.HobbyTaster.Service.Member.MemberInterface;
 import mbc.second.HobbyTaster.Service.Member.MemberService;
@@ -23,6 +25,9 @@ public class MemberController {
 
     @Autowired
     MemberService ms;
+
+    @Autowired
+    ClassService cs;
 
     @Autowired
     MemberRepository mr;
@@ -203,6 +208,12 @@ public class MemberController {
         return "redirect:/admin/memberauth";
     }
 
+    @GetMapping(value = "/admin/classdelete")
+    public String classdelete(@RequestParam("cnum") long cnum) {
+        cs.cdelete(cnum);
+        return "redirect:/admin/classauth";
+    }
+
     @GetMapping(value = "/findidview")
     public String findidview() {
         return "member/findid";
@@ -262,5 +273,4 @@ public class MemberController {
         ms.pwupdate(id, pw);
         return "redirect:/login";
     }
-
 }
