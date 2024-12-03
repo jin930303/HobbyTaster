@@ -10,11 +10,16 @@ import mbc.second.HobbyTaster.entity.Reserve.ReserveEntity;
 @Data
 public class ReserveDTO {
     long resnum;
-    long classId;
-    String userId;
-    String reserveState;
+    long cnum;
+    String id;
+    String resstate;
 
     public ReserveEntity entity() {
-        return (new ReserveEntity(resnum, classId, userId, reserveState));
+        return ReserveEntity.builder()
+                .reserveId(resnum)
+                .classId(cnum)
+                .userId(id)
+                .reserveState(resstate)
+                .build();
     }
 }
