@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" th:src="@{/js/member.check.js}"></script>
+<script type="text/javascript" th:src="@{/js/member.address.js}"></script>
+<script type="text/javascript" th:src="@{/js/member.email.custom.js}"></script>
+<script type="text/javascript" th:src="@{/js/member.pwcheck.js}"></script>
+<body>
+<h1>강사회원가입</h1>
+<form th:action="@{/teachersave}" method="post" onsubmit="return validateForm()">
+    <div>
+        <label for="id">아이디</label>
+        <input type="text" name="id" id="id">
+        <button type="button" name="idcf" id="idcf">중복확인</button>
+        <span id="idError" style="color:red;"></span>
+    </div>
+
+    <div>
+        <label for="pw">비밀번호</label>
+        <input type="password" name="pw" id="pw" required>
+        <span id="pwError" style="color:red;"></span>
+    </div>
+
+    <div>
+        <label for="pwcf">비밀번호 확인</label>
+        <input type="password" name="pwcf" id="pwcf" required>
+        <span id="pwcfError" style="color:red;"></span>
+        <button type="button" name="pwcfcf" id="pwcfcf" onclick="checkPasswordMatch()">비밀번호 일치확인</button>
+    </div>
+
+    <div>
+        <label for="nickname">닉네임</label>
+        <input type="text" name="nickname" id="nickname">
+        <button type="button" name="nncf" id="nncf">중복확인</button>
+    </div>
+
+    <div>
+        <label for="name">이름</label>
+        <input type="text" name="name" id="name">
+    </div>
+
+    <div>
+        <label for="gender">성별</label>
+        <select name="gender" id="gender">
+            <option value="남성">남성</option>
+            <option value="여성">여성</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="email">이메일</label>
+        <input type="text" name="email" id="email">
+        <select name="domain" id="domain" onchange="toggleCustomDomain(this)">
+            <option value="@naver.com">@naver.com</option>
+            <option value="@google.com">@google.com</option>
+            <option value="@kakao.com">@kakao.com</option>
+            <option value="custom">직접입력</option>
+        </select>
+        <input type="text" name="customDomain" id="customDomain" style="display:none;">
+    </div>
+
+    <div>
+        <label>전화번호</label>
+        010-
+        <input type="text" name="phonemid" id="phonemid" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">-
+        <input type="text" name="phoneend" id="phoneend" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">
+        <button type="button" name="pncf" id="pncf">중복확인</button>
+    </div>
+
+    <div>
+        <label for="address">우편번호</label>
+        <input type="text" name="postnum" id="postnum" readonly>
+        <button type="button" onclick="searchAddress()">주소입력</button>
+        <button type="button" onclick="cancelAddress()">입력취소</button>
+    </div>
+    <div>
+        <label for="address">주소</label>
+        <input type="text" name="address" id="address" readonly>
+    </div>
+    <div>
+        <label for="address">상세주소</label>
+        <input type="text" name="detailaddress" id="detailaddress" readonly>
+    </div>
+
+    <div>
+        <button type="submit">회원가입</button>
+        <button type="reset">정보리셋</button>
+        <button type="button" onclick="location.href='/main'">메인으로</button>
+    </div>
+</form>
+</body>
+</html>

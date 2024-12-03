@@ -46,7 +46,8 @@ public class Security{
         http
         .csrf()
         .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave","/csave",
-                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview","/reviews","/cupdate1",
+                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview",
+                "/reviews","/teacher/csave","/teacher/cupdate1",
                 "/findidemail", "/findidphone","/findpw", "/updatepw")  // 특정 경로에서만 CSRF 비활성화
         .and()
         .authorizeRequests()
@@ -56,9 +57,10 @@ public class Security{
                     "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search","/reviews",
                     "/findidview", "/findidemail", "/findidphone", "/findpwview", "/findpw", "/updatepw",
                     "/css/**", "/js/**", "/image/**").permitAll()
-        .requestMatchers("/my/**").hasAnyAuthority("Admin","Teacher","Normal")  // Admin 전용
-        .requestMatchers("/admin/**", "/reviews/*/comment").hasAuthority("Admin")  // Admin 전용
-        .requestMatchers("/teacher/**", "/reviews/*/comment").hasAuthority("Teacher") // Teacher 전용
+        .requestMatchers("/my/**").hasAnyAuthority("Admin","Teacher","Normal")  // 로그인 전용
+        .requestMatchers("/adminteach/**", "/reviews/*/comment").hasAnyAuthority("Admin","Teacher")  // 로그인 전용
+        .requestMatchers("/admin/**").hasAuthority("Admin")  // Admin 전용
+        .requestMatchers("/teacher/**").hasAuthority("Teacher") // Teacher 전용
         .requestMatchers("/user/**").hasAuthority("Normal") // Normal 전용
         .anyRequest().authenticated() // 그 외는 인증 필요
         .and()
@@ -68,6 +70,8 @@ public class Security{
         .loginProcessingUrl("/loginProcess")
         .usernameParameter("id")
         .passwordParameter("pw")
+        .defaultSuccessUrl("/")
+        .failureUrl("/")
         .successHandler(new AuthenticationSuccessHandler() {
             @Override public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)throws IOException, ServletException {
                 System.out.println("로그인 ID : "+authentication.getName());
@@ -94,6 +98,7 @@ public class Security{
         .permitAll()
         .logoutUrl("/logout")
         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessUrl("/")
         .deleteCookies("JSESSIONID")
         .invalidateHttpSession(true)
         .clearAuthentication(true);
