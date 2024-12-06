@@ -9,7 +9,7 @@ function searchAddress() {
     }).open();
 }
 
-function cancelAddress() {
+/*function cancelAddress() {
     var inputpn=document.getElementById("postnum");
     inputpn.value="";
     var inputad=document.getElementById("address");
@@ -17,7 +17,7 @@ function cancelAddress() {
     var inputda=document.getElementById("detailaddress");
     inputda.value="";
     inputda.readOnly=true;
-}
+}*/
   function DaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

@@ -2,41 +2,61 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{top::menu}"></div>
-
+<head>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/detail.css}">
+</head>
 <body>
-<div id="Left-container">
-  <div id="imgcontainer">
-    <img th:src="@{/image/}+${dto.cmimage}">
+<div class="Left-container">
+  <div class="img-container">
+    <img th:src="@{/image/}+${dto.cmimage}" width="670px" height="530px" class="img-container">
   </div>
   </div>
 
-<div id="Right-contianer">
-  <div id="ctitle">
-    <a th:text="${dto.cname}"></a>
-  </div>
-<div id="cprice">
-  <a th:text="${dto.cprice}"></a>
+<div class="Right-contianer">
+  <div class="right-item">클래스명</div>  <div th:text="${dto.cname}" class="right-item"></div>
+  <div class="right-item" >클래스 금액</div>   <div th:text="|${dto.cprice} 원|" class="right-item"></div>
+  <div class="right-item">클래스 시작 시간</div> <div th:text="|${dto.ctime}시 부터~|" class="right-item"></div>
+  <div class="right-item">클래스 진행 시간</div> <div th:text="${dto.cminute}" class="right-item"></div>
+  <div class="right-item">클래스 인원</div>  <div th:text="|${dto.cpl}명|" class="right-item"></div>
+ <div class="right-item">
+  <form action="/reserve_plus" method="post">
+    <input type="hidden" name="cnum" th:value="${dto.cnum}">
+    <input type="hidden" name="cteach" th:value="${dto.cteach}">
+    <button type="submit">예약하기</button>
+  </form>
 </div>
-  <div id="ctime">
-  <a th:text="${dto.ctime}"></a>
 </div>
+<div class="detail-container">
+<div class="detail-image">
+  <img th:src="@{/image/}+${dto.cdimage}" width="1173px" class="detail-img-container">
 </div>
-
-<div id="detail-container">
-<div id="detail-image">
-  <img th:src="@{/image/}+${dto.cdimage}">
-</div>
-<div id="detail-text">
+<div class="detail-text">
   <a th:text="${dto.cdtext}"></a>
 </div>
 </div>
 
-<div id="map-container">
+<div class="map-container">
 
 </div>
 
-<div id="review-container">
-  <form th:action="@{'/detail/review?num=' + ${dto.cnum}}" method="post" th:object="${review}" enctype="multipart/form-data">
+<div class="review-container">
+
+  <h3>리뷰 목록</h3>
+  <div th:if="${reviews.isEmpty()}" class="review-emptylist">
+    <p>등록된 리뷰가 없습니다.</p>
+  </div>
+  <div th:each="review : ${reviews}" class="review-list">
+    <h4 th:text="${review.title}">리뷰 제목</h4>
+    <p th:text="${review.contents}">리뷰 내용</p>
+    <p><img th:src="@{/image/}+${review.image1}"></p>
+    <p>평점: <span th:text="${review.revstar}">0</span></p>
+    <p>작성자: <span th:text="${review.nickname}">닉네임</span></p>
+    <p><small th:text="${review.revdate}">작성 날짜</small></p>
+    <p th:text="${review.revnum}">리뷰번호</p>
+    <!-- 댓글 작성 폼 -->
+  </div>
+
+  <form th:action="@{'/detail/review?num=' + ${dto.cnum}}" method="post" th:object="${review}" enctype="multipart/form-data" class="review-write">
     <div>
       <label for="title">제목:</label>
       <input type="text" id="title" th:field="*{title}" required>
@@ -57,20 +77,7 @@
     <button type="submit">리뷰 등록</button>
   </form>
 
-  <h3>리뷰 목록</h3>
-  <div th:if="${reviews.isEmpty()}">
-    <p>등록된 리뷰가 없습니다.</p>
-  </div>
-  <div th:each="review : ${reviews}">
-    <h4 th:text="${review.title}">리뷰 제목</h4>
-    <p th:text="${review.contents}">리뷰 내용</p>
-    <p><img th:src="@{/image/}+${review.image1}"></p>
-    <p>평점: <span th:text="${review.revstar}">0</span></p>
-    <p>작성자: <span th:text="${review.nickname}">닉네임</span></p>
-    <p><small th:text="${review.revdate}">작성 날짜</small></p>
-    <p th:text="${review.revnum}">리뷰번호</p>
-    <!-- 댓글 작성 폼 -->
-  </div>
+
 
 
 </div>

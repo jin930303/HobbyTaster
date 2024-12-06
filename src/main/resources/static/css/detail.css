@@ -1,0 +1,50 @@
+body{
+
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+}
+
+.Left-container{
+    margin-left : 20em;
+    margin-top : 10em;
+
+}
+.Left-container .img-container{
+    border-radius : 5%;
+}
+.Right-contianer{
+    margin-top : -33.4em;
+    margin-left : 68em;
+    margin-right : 20em;
+    border : 1px solid;
+    display : flex;
+    flex-wrap: wrap;
+    width: 400px;
+    height : 33em;
+    border-radius : 5%;
+}
+.right-item{
+    flex : 1 1 50%;
+    box-sizing: border-box; /* 패딩, 보더 포함 크기 조정 */
+    /* 아이템 구분 */
+    padding: 10px;
+    text-align: center;
+}
+.detail-container{
+    margin-top :3em;
+    margin-left : 20em;
+    margin-right :20em;
+}
+.detail-img-container{
+    border-radius : 5%;
+}
+.review-container{
+    margin-left : 20em;
+    margin-top : 3emn;
+}
+.review-write{
+    margin-top: 3em;
+
+}
+
