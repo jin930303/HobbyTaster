@@ -13,6 +13,7 @@ public class ReserveDTO {
     long cnum;
     String id;
     String resstate;
+    String nickname;
 
     public ReserveEntity entity() {
         return ReserveEntity.builder()
@@ -20,6 +21,7 @@ public class ReserveDTO {
                 .classId(cnum)
                 .userId(id)
                 .reserveState(resstate)
+                .reserveTeach(nickname)
                 .build();
     }
 }

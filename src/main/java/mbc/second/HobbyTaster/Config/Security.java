@@ -48,14 +48,14 @@ public class Security{
         .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave","/csave",
                 "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview",
                 "/reviews","/teacher/csave","/teacher/cupdate1",
-                "/findidemail", "/findidphone","/findpw", "/updatepw")  // 특정 경로에서만 CSRF 비활성화
+                "/findidemail", "/findidphone","/findpw", "/updatepw", "/reserve_plus", "/reserve_out", "/teacher_class")  // 특정 경로에서만 CSRF 비활성화
         .and()
         .authorizeRequests()
         .requestMatchers("/", "/main","/member","/memberinput", "/membersave",
                     "/kakaoinput", "/kakaosave", "/teacherinput", "/teachersave",
                     "/csave","/cupdate","/cupdate1",
                     "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search","/reviews",
-                    "/findidview", "/findidemail", "/findidphone", "/findpwview", "/findpw", "/updatepw",
+                    "/findidview", "/findidemail", "/findidphone", "/findpwview", "/findpw", "/updatepw", "/reserve_plus", "/reserve_out", "/teacher_class",
                     "/css/**", "/js/**", "/image/**").permitAll()
         .requestMatchers("/my/**").hasAnyAuthority("Admin","Teacher","Normal")  // 로그인 전용
         .requestMatchers("/adminteach/**", "/reviews/*/comment").hasAnyAuthority("Admin","Teacher")  // 로그인 전용

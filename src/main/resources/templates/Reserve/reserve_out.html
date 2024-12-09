@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
 <body>
+    <div>
+        <h2>Basic Table</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>예약번호</th>
+                <th>회원 아이디</th>
+                <th>CLASS 번호</th>
+                <th>진행상태</th>
+                <th>강사/학원명</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reserve:${reserve}">
+                <td th:text="${reserve.reserveId}"></td>
+                <td th:text="${reserve.userId}"></td>
+                <td th:text="${reserve.classId}"></td>
+                <td th:text="${reserve.reserveState}"></td>
+                <td th:text="${reserve.reserveTeach}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
 
 </body>
 </html>

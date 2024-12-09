@@ -1,7 +1,6 @@
 package mbc.second.HobbyTaster.Entity.Reserve;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,11 +25,16 @@ public class ReserveEntity {
     @Column(name = "resstate")
     String reserveState;
 
+    @Column(name = "nickname")
+    String reserveTeach;
+
     @Builder
-    public ReserveEntity(long reserveId, long classId, String userId, String reserveState) {
+
+    public ReserveEntity(long reserveId, long classId, String userId, String reserveState, String reserveTeach) {
         this.reserveId = reserveId;
         this.classId = classId;
         this.userId = userId;
         this.reserveState = reserveState;
+        this.reserveTeach = reserveTeach;
     }
 }
