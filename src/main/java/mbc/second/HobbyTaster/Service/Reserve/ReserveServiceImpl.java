@@ -1,9 +1,8 @@
 package mbc.second.HobbyTaster.Service.Reserve;
 
 import mbc.second.HobbyTaster.DTO.Reserve.ReserveDTO;
-import mbc.second.HobbyTaster.Entity.Class.ClassEntity;
+import mbc.second.HobbyTaster.Entity.Member.MemberEntity;
 import mbc.second.HobbyTaster.Entity.Reserve.ReserveEntity;
-import mbc.second.HobbyTaster.Repository.Class.ClassRepository;
 import mbc.second.HobbyTaster.Repository.Reserve.ReserveRepository;
 import mbc.second.HobbyTaster.Service.Class.ClassInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +16,27 @@ public class ReserveServiceImpl implements ReserveService {
     ReserveRepository repository;
 
     @Override
-    public void reserve_save(long cnum, String userId, String reserveTeach) {
-        ReserveDTO dto = new ReserveDTO();
-        dto.setCnum(cnum);
-        dto.setId(userId);
-        dto.setResstate("진행중");
-        dto.setNickname(reserveTeach);
+    public String reserve_save(long cnum, String userId, String reserveTeach) {
+        // cpl(모집인원) 찾기
+        Integer cpl = repository.findCplByCnum(cnum);
 
-        ReserveEntity entity = dto.entity();
+        Integer countreserve = repository.countByCnum(cnum);
 
-       repository.save(entity);
+        if(countreserve >= cpl) {
+            return "예약인원이 가득 찼습니다.";
+        }
+        else {
+            ReserveDTO dto = new ReserveDTO();
+            dto.setCnum(cnum);
+            dto.setId(userId);
+            dto.setResstate("진행중");
+            dto.setNickname(reserveTeach);
+
+            ReserveEntity entity = dto.entity();
+            repository.save(entity);
+
+            return "예약이 완료되었습니다.";
+        }
     }
 
     @Override
@@ -42,5 +52,10 @@ public class ReserveServiceImpl implements ReserveService {
     @Override
     public List<ClassInterface> class_out(String nickname) {
         return repository.findState(nickname);
+    }
+
+    @Override
+    public List<MemberEntity> finByUser(String nickname) {
+        return repository.finduserId(nickname);
     }
 }

@@ -25,11 +25,8 @@
                         <li>
                             <a th:href="@{/teacher/cinput}" sec:authorize="hasAuthority('Teacher')"  th:text="'클래스 등록'"></a>
                         </li>
-                        <!--
-                        <li><a href="teacher_class">클래스 관리</a></li>
--->
-                        <li><a th:href="@{/teacher/teacher_class}" sec:authorize="hasAuthority('Teacher')"  th:text="'클래스 관리'"></a></li>
 
+                        <li><a th:href="@{/teacher/teacher_class}" sec:authorize="hasAuthority('Teacher')"  th:text="'클래스 관리'"></a></li>
                         <li><a href="#">서브 링크 1-3</a></li>
                     </ul>
                 </li>

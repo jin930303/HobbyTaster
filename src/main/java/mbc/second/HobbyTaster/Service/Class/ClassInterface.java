@@ -21,9 +21,9 @@ public interface ClassInterface {
     String getCdtext();      // cclass
     long getCprice();        // cclass
 
-    String getName();        // member
-    String getPhone();       // member
-    String getEmail();       // member
+    String getMemberName();  // member.name
+    String getMemberEmail(); // member.email
+    String getMemberPhone(); // member.phone
 
     long getResnum();        // reserve
     String getResstate();    // reserve
