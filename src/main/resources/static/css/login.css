@@ -1,0 +1,15 @@
+.login-container{
+    margin-left : 35%;
+    margin-top : 10%;
+    margin-right : 40%;
+    border : 1px solid;
+}
+.id-group{
+    margin-top : 3%;
+}
+.pw-group{
+    margin-top : 3%;
+}
+.button-container{
+    margin-top : 3%;
+}
