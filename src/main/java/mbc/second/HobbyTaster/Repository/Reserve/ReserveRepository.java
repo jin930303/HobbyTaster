@@ -30,17 +30,10 @@ public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
     String nicknamefind(@Param("userId") String userId);
 
     @Transactional
-    @Query(value = "select c.*, r.*, m.name as member_name, m.phone as member_phone, m.email as member_email  " +
+    @Query(value = "select c.*, r.*, m.name as member_name, m.phone as member_phone, m.email as member_email " +
             "from reserve r " +
             "join cclass c on r.cnum = c.cnum " +
             "join member m on r.id = m.id " +
             "where c.cteach = :nickname", nativeQuery = true)
     List<ClassInterface> findState(@Param("nickname") String nickname);
-
-    @Transactional
-    @Query(value = "select m.name, m.email, m.phone " +
-            "from member m " +
-            "join reserve r on r.id = m.id " +
-            "where r.nickname = :nickname", nativeQuery = true)
-    List<MemberEntity> finduserId(@Param("nickname") String nickname);
 }

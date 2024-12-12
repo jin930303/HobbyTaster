@@ -53,9 +53,4 @@ public class ReserveServiceImpl implements ReserveService {
     public List<ClassInterface> class_out(String nickname) {
         return repository.findState(nickname);
     }
-
-    @Override
-    public List<MemberEntity> finByUser(String nickname) {
-        return repository.finduserId(nickname);
-    }
 }

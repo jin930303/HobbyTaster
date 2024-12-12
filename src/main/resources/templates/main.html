@@ -2,19 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>main page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <script type="text/javascript" th:src="@{/js/main.search.category.js}"></script>
 </head>
 <body>
     <div th:replace="~{top::menu}"></div>
+    <div class="main-image-box">
+        <img src="/image/고양이.jpg">
+    </div>
     <div class="main-container">
-        <div class="main-image-box">
-            <img src="/image/고양이.jpg">
-        </div>
-
         <!-- 초기 검색창 -->
         <div class="click-search">
-            <input type="text" id="click_search_input" placeholder="검색어를 입력하세요...">
+            <input type="text" id="click_search_input" placeholder="검색어를 입력하세요..." >
         </div>
 
         <!-- 상단에서 내려오는 확장 검색창 -->
@@ -23,7 +27,7 @@
                 <form action="total_search" method="post">
                     <!--검색할 때에는 수업명, 강사명-->
                     <div id="search-text">
-                        <input type="text" name="tot_search" placeholder="검색어를 입력해주세요." autofocus>
+                        <input type="text" name="tot_search" placeholder="검색어를 입력해주세요.">
                     </div>
                     <!--날짜-->
                     <div id="search-day">
@@ -90,6 +94,8 @@
         </div>
 
         <div class="Big-category">
+            <p id="best-oneday">베스트 ONEDAY</p>
+            <hr>
             <ul id="category-list">
                 <li>
                     <a th:href="@{category_class(categories='공예')}">
@@ -98,15 +104,91 @@
                             <p>공예 더보기</p>
                         </div>
                     </a>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="doye:${doye}">
+                                    <a th:href="@{detail(num=${doye.cnum})}">
+                                        <div class="item-box">
+                                            <span>도 예</span>
+                                            <img th:src="@{/image/}+${doye.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(doye.cname, 0, doye.cname.length() > 10 ? 10 : doye.cname.length()) + (doye.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="doll:${doll}">
+                                    <a th:href="@{detail(num=${doll.cnum})}">
+                                        <div class="item-box">
+                                            <span>인 형</span>
+                                            <img th:src="@{/image/}+${doll.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(doll.cname, 0, doll.cname.length() > 10 ? 10 : doll.cname.length()) + (doll.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="jewell:${jewell}">
+                                    <a th:href="@{detail(num=${jewell.cnum})}">
+                                        <div class="item-box">
+                                            <span>쥬얼리</span>
+                                            <img th:src="@{/image/}+${jewell.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(jewell.cname, 0, jewell.cname.length() > 10 ? 10 : jewell.cname.length()) + (jewell.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </li>
+
                 <li>
                     <a th:href="@{category_class(categories='예술')}">
                         <div class="category-box" style="background-image: url('/image/예술.jpg');">
-                            <label>예술</label>
+                            <label>예 술</label>
                             <p>예술 더보기</p>
                         </div>
                     </a>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="drawing:${drawing}">
+                                    <a th:href="@{detail(num=${drawing.cnum})}">
+                                        <div class="item-box">
+                                            <span>드로잉</span>
+                                            <img th:src="@{/image/}+${drawing.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(drawing.cname, 0, drawing.cname.length() > 10 ? 10 : drawing.cname.length()) + (drawing.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="picture:${picture}">
+                                    <a th:href="@{detail(num=${picture.cnum})}">
+                                        <div class="item-box">
+                                            <span>사 진</span>
+                                            <img th:src="@{/image/}+${picture.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(picture.cname, 0, picture.cname.length() > 10 ? 10 : picture.cname.length()) + (picture.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="music:${music}">
+                                    <a th:href="@{detail(num=${music.cnum})}">
+                                        <div class="item-box">
+                                            <span>음 악</span>
+                                            <img th:src="@{/image/}+${music.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(music.cname, 0, music.cname.length() > 10 ? 10 : music.cname.length()) + (music.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </li>
+
                 <li>
                     <a th:href="@{category_class(categories='베이킹')}">
                         <div class="category-box" style="background-image: url('/image/베이킹.jpg');">
@@ -114,6 +196,43 @@
                             <p>베이킹 더보기</p>
                         </div>
                     </a>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="cookie:${cookie}">
+                                    <a th:href="@{detail(num=${cookie.cnum})}">
+                                        <div class="item-box">
+                                            <span>쿠 키</span>
+                                            <img th:src="@{/image/}+${cookie.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(cookie.cname, 0, cookie.cname.length() > 10 ? 10 : cookie.cname.length()) + (cookie.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="cake:${cake}">
+                                    <a th:href="@{detail(num=${cake.cnum})}">
+                                        <div class="item-box">
+                                            <span>케이크</span>
+                                            <img th:src="@{/image/}+${cake.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(cake.cname, 0, cake.cname.length() > 10 ? 10 : cake.cname.length()) + (cake.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="bread:${bread}">
+                                    <a th:href="@{detail(num=${bread.cnum})}">
+                                        <div class="item-box">
+                                            <span>빵</span>
+                                            <img th:src="@{/image/}+${bread.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(bread.cname, 0, bread.cname.length() > 10 ? 10 : bread.cname.length()) + (bread.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </li>
                 <li>
                     <a th:href="@{category_class(categories='주류')}">
@@ -122,130 +241,47 @@
                             <p>주류 더보기</p>
                         </div>
                     </a>
-                </li>
-            </ul>
-        </div>
-        <div class="sub-categoty">
-            <table>
-                <tr>
-                    <th colspan="3">공예</th>
-                </tr>
-                <tr>
-                    <td th:each="doye:${doye}">도예
-                        <a th:href="@{detail(num=${doye.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${doye.cmimage}" width="150px">
-                                <p th:text="${doye.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="doll:${doll}">인형
-                        <a th:href="@{detail(num=${doll.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${doll.cmimage}" width="150px">
-                                <p th:text="${doll.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="jewell:${jewell}">쥬얼리
-                        <a th:href="@{detail(num=${jewell.cnum})}">
-                                <div class="item-box">
-                                    <img th:src="@{/image/}+${jewell.cmimage}" width="150px">
-                                <p th:text="${jewell.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="3">예술</th>
-                </tr>
-                <tr>
-                    <td th:each="drawing:${drawing}">드로잉
-                        <a th:href="@{detail(num=${drawing.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${drawing.cmimage}" width="150px">
-                                <p th:text="${drawing.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="picture:${picture}">사진
-                        <a th:href="@{detail(num=${picture.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${picture.cmimage}" width="150px">
-                                <p th:text="${picture.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="music:${music}">음악
-                        <a th:href="@{detail(num=${music.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${music.cmimage}" width="150px">
-                                <p th:text="${music.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="3">베이킹</th>
-                </tr>
-                <tr>
-                    <td th:each="cookie:${cookie}">쿠키
-                        <a th:href="@{detail(num=${cookie.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${cookie.cmimage}" width="150px">
-                                <p th:text="${cookie.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="cake:${cake}">케이크
-                        <a th:href="@{detail(num=${cake.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${cake.cmimage}" width="150px">
-                                <p th:text="${cake.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="bread:${bread}">빵
-                        <a th:href="@{detail(num=${bread.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${bread.cmimage}" width="150px">
-                                <p th:text="${bread.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="3">주류</th>
-                </tr>
-                <tr>
-                    <td th:each="wine:${wine}">쿠키
-                        <a th:href="@{detail(num=${wine.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${wine.cmimage}" width="150px">
-                                <p th:text="${wine.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="beer:${beer}">케이크
-                        <a th:href="@{detail(num=${beer.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${beer.cmimage}" width="150px">
-                                <p th:text="${beer.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                    <td th:each="tradition:${tradition}">빵
-                        <a th:href="@{detail(num=${tradition.cnum})}">
-                            <div class="item-box">
-                                <img th:src="@{/image/}+${tradition.cmimage}" width="150px">
-                                <p th:text="${tradition.cname}"></p>
-                            </div>
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="wine:${wine}">
+                                    <a th:href="@{detail(num=${wine.cnum})}">
+                                        <div class="item-box">
+                                            <span>와 인</span>
+                                            <img th:src="@{/image/}+${wine.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(wine.cname, 0, wine.cname.length() > 10 ? 10 : wine.cname.length()) + (wine.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="beer:${beer}">
+                                    <a th:href="@{detail(num=${beer.cnum})}">
+                                        <div class="item-box">
+                                            <span>맥 주</span>
+                                            <img th:src="@{/image/}+${beer.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(beer.cname, 0, beer.cname.length() > 10 ? 10 : beer.cname.length()) + (beer.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="tradition:${tradition}">
+                                    <a th:href="@{detail(num=${tradition.cnum})}">
+                                        <div class="item-box">
+                                            <span>전통주</span>
+                                            <img th:src="@{/image/}+${tradition.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(tradition.cname, 0, tradition.cname.length() > 10 ? 10 : tradition.cname.length()) + (tradition.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table> <!-- sub-category 테이블 -->
+                    </div> <!-- sub-category 클래스 -->
+                </li> <!-- category-list 리스트 -->
+            </ul> <!-- category-list 아이디 -->
+        </div> <!-- Big-category 클래스 -->
+    </div> <!-- main-container 클래스 -->
 </body>
 
 </html>

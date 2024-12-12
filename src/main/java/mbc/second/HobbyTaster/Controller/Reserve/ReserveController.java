@@ -1,9 +1,6 @@
 package mbc.second.HobbyTaster.Controller.Reserve;
 
 import lombok.extern.slf4j.Slf4j;
-import mbc.second.HobbyTaster.DTO.Class.ClassDTO;
-import mbc.second.HobbyTaster.Entity.Class.ClassEntity;
-import mbc.second.HobbyTaster.Entity.Member.MemberEntity;
 import mbc.second.HobbyTaster.Entity.Reserve.ReserveEntity;
 import mbc.second.HobbyTaster.Service.Class.ClassInterface;
 import mbc.second.HobbyTaster.Service.Reserve.ReserveService;
@@ -61,12 +58,6 @@ public class ReserveController {
         // 데이터 찾기
         List<ClassInterface> data = service.class_out(nickname);
         mo.addAttribute("data", data);
-
-        /* 예약자 데이터 찾기
-        List<MemberEntity> user_data = service.finByUser(nickname);
-        mo.addAttribute("user", user_data);
-
-         */
 
         return "reserve/class_out";
     }

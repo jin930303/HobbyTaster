@@ -15,6 +15,4 @@ public interface ReserveService {
     String findNickname(String userId);
 
     List<ClassInterface> class_out(String nickname);
-
-    List<MemberEntity> finByUser(String nickname);
 }
