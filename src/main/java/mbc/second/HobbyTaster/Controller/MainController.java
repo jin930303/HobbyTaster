@@ -162,7 +162,7 @@ public class MainController {
         model.addAttribute("pageSize", size); // 페이지 크기
         model.addAttribute("totalPages", totalPages); // 전체 페이지
         model.addAttribute("categories", categories); // 카테고리 Cat1임
-
+        log.info("category리스트 : "+categoryList);
         return "/class/category";
     }
 
