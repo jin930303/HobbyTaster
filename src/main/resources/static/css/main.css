@@ -1,0 +1,178 @@
+/* 네비게이션 바 간격 유지 */
+body {
+    margin-top: 100px;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+}
+
+/* 메인 컨테이너 */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-image-box {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+}
+/* 메인 이미지 */
+.main-image-box img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%; /* 수직 중앙 정렬 */
+    left: 50%; /* 수평 중앙 정렬 */
+    transform: translate(-50%, -50%);
+}
+
+/* 초기 검색창 */
+.click-search {
+    position: relative;
+    z-index: 1;
+}
+
+.click-search input {
+    padding: 20px;
+    font-size: 20px;
+    margin: 30px;
+    width: 1000px;
+    border: 2px solid #eba556;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* 상단에서 내려오는 확장 검색창 */
+.hidden-search {
+    position: fixed;
+    top: -400px; /* 초기 상태에서 화면 위로 숨김 */
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    text-align: center;
+    transition: top 0.5s ease; /* 부드러운 애니메이션 */
+    z-index: 999; /* nav 위로 표시 */
+}
+
+.hidden-search input[type="text"],
+.hidden-search input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    height: 25%;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    justify-content: center;
+}
+
+/* 검색창 활성화 상태 */
+.hidden-search.active,
+.hidden-search.focus {
+    top: 0; /* nav 바로 아래로 표시 */
+    /*background-color : rgb(255,255,255,0.8);*/
+}
+
+/* 카테고리 화면 */
+#category-list {
+    display: flex; /* flex-container 로 지정 */
+    flex-direction: row; /* flex-item들을 가로로 정렬*/
+    justify-content: space-between; /* 아이템 사이 간격 동일하게*/
+    gap: 20px; /* 사이 간격 지정 */
+    margin-top: 20px;
+    margin-left: 0;
+    padding: 0;
+    align-items: center; /* item들 가운데 정렬 */
+    list-style-type: none; /* 리스트 스타일 제거 */
+}
+/* 링크 스타일 */
+.Big-category ul li a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 기존 폰트 컬러 유지 */
+}
+.Big-category ul li a:hover {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 기존 폰트 컬러 유지 */
+}
+
+/* 카테고리 상자 ( 공예, 예술, 베이킹, 주류 ) */
+.category-box {
+    width: 350px;
+    height: 400px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+    background-size: cover; /* 백그라운드 대충 맞게 커버 */
+    background-position: center; /* 백그라운드 가운데 정렬*/
+
+}
+
+.category-box label{
+    font-family: "Black Han Sans", sans-serif;
+    font-weight: 599;
+    font-size: 50px;
+    color: #eba556;
+    /*-webkit-text-stroke: 1px #fff;*/
+}
+
+.sub-container {
+    display: flex; /* item-box들을 묶는 부모 컨테이너 */
+    gap: 20px; /* 박스 간 간격 */
+}
+
+.item-box {
+    width: 350px;
+    height: 150px;
+    padding: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+    transform: scale(1.0);
+    transform: border none;
+
+}
+
+.item-box img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.item-box p {
+    font-family: "Mulish", sans-serif;
+    font-size: 12px;
+}
+
+.item-box span {
+    position: absolute;
+    z-index:1;
+    writing-mode: vertical-lr;
+    font-family: "Black Han Sans", sans-serif;
+    font-weight: 599;
+    font-size: 40px;
+    color: #eba556;
+    left: 10px;
+    /*-webkit-text-stroke: 1px #fff;*/
+}
+
+table tr {
+    background-color: #f3f3f3;
+}
+
+#best-oneday {
+    font-family: "Black Han Sans", sans-serif;
+    font-weight: 599;
+    font-size: 50px;
+    color: #eba556;
+    text-align:center;
+}

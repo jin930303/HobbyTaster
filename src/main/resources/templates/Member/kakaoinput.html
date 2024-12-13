@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" th:src="@{/js/member.kakao.check.js}"></script>
+<script type="text/javascript" th:src="@{/js/member.address.js}"></script>
+<body>
+<h1>카카오 일반회원가입</h1>
+<form th:action="@{/kakaosave}" method="post" onsubmit="return validateForm()">
+    <div>
+        <label for="id">아이디</label>
+        <input type="text" name="id" id="id" th:value="${userInfo.KakaoAccount.Profile.nickname}+'@kakao'" readonly>
+        <span id="idError" style="color:red;"></span>
+        <input type="hidden" name="pw" id="pw" th:value="${userInfo.KakaoAccount.email}" readonly>
+    </div>
+
+    <div>
+        <label for="nickname">닉네임</label>
+        <input type="text" name="nickname" id="nickname" th:value="${userInfo.KakaoAccount.Profile.nickname}">
+        <button type="button" name="nncf" id="nncf">중복확인</button>
+    </div>
+
+    <div>
+        <label for="name">이름</label>
+        <input type="text" name="name" id="name">
+    </div>
+
+    <div>
+        <label for="gender">성별</label>
+        <select name="gender" id="gender">
+            <option value="남성">남성</option>
+            <option value="여성">여성</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="email">이메일</label>
+        <input type="text" name="email" id="email" th:value="${userInfo.KakaoAccount.email}" readonly>
+    </div>
+
+    <div>
+        <label>전화번호</label>
+        010-
+        <input type="text" name="phonemid" id="phonemid" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">-
+        <input type="text" name="phoneend" id="phoneend" pattern="\d{4}" maxlength="4" title="4자리 숫자를 입력하세요">
+        <button type="button" name="pncf" id="pncf">중복확인</button>
+    </div>
+
+    <div>
+        <label for="address">우편번호</label>
+        <input type="text" name="postnum" id="postnum" readonly>
+        <button type="button" onclick="searchAddress()">주소입력</button>
+        <button type="button" onclick="cancelAddress()">입력취소</button>
+    </div>
+    <div>
+        <label for="address">주소</label>
+        <input type="text" name="address" id="address" readonly>
+    </div>
+    <div>
+        <label for="address">상세주소</label>
+        <input type="text" name="detailaddress" id="detailaddress" readonly>
+    </div>
+
+    <div>
+        <button type="submit">회원가입</button>
+        <button type="reset">정보리셋</button>
+        <button type="button" onclick="location.href='/main'">메인으로</button>
+    </div>
+</form>
+</body>
+</html>

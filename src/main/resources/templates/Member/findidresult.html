@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<body>
+<div>
+    <div>
+        <p th:text="'아이디 검색결과 : ' + ${findid}"></p>
+    </div>
+
+    <div>
+        <button type="button" th:onclick="location.href='/findpwview'">비밀번호 찾기</button>
+    </div>
+
+    <div>
+        <button type="button" th:onclick="location.href='/login'">로그인</button>
+    </div>
+</div>
+</body>
+</html>

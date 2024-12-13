@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<head>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/faq.faqoutput.css}">
+</head>
+<body>
+<div class="out-container">
+  <div class="main-container" th:each="out:${faqout}" >
+    <div class="item-box">
+      <p><h3 th:text="${out.fnum}"></h3></p>
+      <strong><h2 th:text="${out.ftitle}"></h2></strong>
+      <p><h4 th:text="${out.fcontents.length() > 10 ? #strings.substring(out.fcontents, 0, 10) + '...' : out.fcontents}"></h4></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

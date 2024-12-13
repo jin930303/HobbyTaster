@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<body>
+<div>
+  <h2>Basic Table</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>예약번호</th><th>예약자</th><th>전화번호</th><th>이메일</th>
+      <th>수업명</th><th>회차</th><th>수업일자</th><th>시작시간</th>
+      <th>소요시간</th><th>모집인원</th><th>금액</th><th>진행상태</th><th>비고</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="data:${data}">
+      <td th:text="${data.resnum}"></td>
+      <td th:text="${data.memberName}"></td>
+      <td th:text="${data.memberPhone}"></td>
+      <td th:text="${data.memberEmail}"></td>
+      <td th:text="${data.cname}"></td>
+      <td th:text="${data.cround}"></td>
+      <td th:text="${data.cdate}"></td>
+      <td th:text="${data.ctime}"></td>
+      <td th:text="${data.cminute}"></td>
+      <td th:text="${data.cpl}"></td>
+      <td th:text="${data.cprice}"></td>
+      <td th:text="${data.resstate}"></td>
+      <td>
+        <a th:href="@{reserve_satate(resnum=${data.resnum})}"></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+</body>
+</html>

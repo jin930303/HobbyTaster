@@ -1,0 +1,54 @@
+.all-container{
+    margin-left : 30%;
+    margin-top : 5em;
+ }
+.all-container .header-container{
+    margin-left : 10em;
+ }
+ .body-container{
+ margin-top:5em;
+ border : 1px solid;
+ margin-right : 50%;
+ height : 500px;
+ }
+
+.id-container{
+    margin :1em 0;
+}
+.input-group{
+    display : flex;
+    align-items : center;
+    gap : 0.5em;
+}
+.pwcheck-container{
+    margin : 1em 0;
+}
+.pwcheck-group{
+    display : flex;
+    align-items : center;
+    gap : 0.5em;
+}
+.nickname-container{
+     margin :1em 0;
+}
+.nickname-group{
+    display : flex;
+    align-items : center;
+    gap : 0.5em;
+}
+.phone-container{
+    margin :1em 0;
+}
+.phone-group{
+     display : flex;
+     align-items : center;
+     gap : 0.5em;
+}
+.address-container{
+     margin :1em 0;
+}
+.address-group{
+    display : flex;
+    align-items : center;
+    gap : 0.5em;
+}

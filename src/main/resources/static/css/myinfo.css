@@ -1,0 +1,27 @@
+.body-container {
+    margin-left : 30%;
+    border :1px solid;
+    margin-right : 30%;
+    margin-top : 5%;
+}
+
+.id-container ,.nickname-container ,.name-container ,.phone-container ,.gender-container ,.add-container ,.button-container{
+    margin :1em 0;
+}
+.id-group ,.nickname-group, .name-group ,.phone-group, .gender-group, .add-group ,.button-group{
+    display : flex;
+    align-items : center;
+    gap : 0.5em;
+}
+
+.side-bar{
+ margin-top :9%;
+ width:20%;
+ height: 50%;
+ position : fixed;
+ display : flex;
+ justify-content : center;
+ align-items : center;
+ left :75%;
+ border : 1px solid;
+}

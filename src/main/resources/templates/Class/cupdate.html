@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<head>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script type="text/javascript" th:src="@{/js/cinput.js}"></script>
+  <script type="text/javascript" th:src="@{/js/address.js}"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/cinput.css}">
+</head>
+<body>
+<div class="container">
+  <form th:action="@{/teacher/cupdate1}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="cnum" id="cnum" th:value="${entity.cnum}" >
+    <input type="hidden" name="cstate" id="cstate" th:value="대기" >
+    <table>
+      <tr>
+        <th>대분류 </th>
+        <td>
+          <div class="input-container">
+            <select name="cat1" id="cat1" onchange="updateSubCategory()" >
+              <option value="" >-- 선택하세요 --</option>
+              <option value="공예">공예</option>
+              <option value="예술">예술</option>
+              <option value="베이킹">베이킹</option>
+              <option value="주류">주류</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>중분류</th>
+        <td>
+          <div class="input-container">
+            <select name="cat2" id="cat2">
+              <option value="" >-- 중분류 선택 --</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="cname" >강의명</label></th>
+        <td>
+          <div class="input-container">
+            <input type="text" id="cname" name="cname"  autofocus="autofocus" th:placeholder="${entity.cname}" required>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>회차</th>
+        <td>
+          <div class="input-container">
+            <input type="number" name="cround" id="cround" placeholder="회차" min="1"  th:placeholder="${entity.cround}" required>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>강사명/학원명</th>
+        <td>
+          <div class="input-container">
+            <input type="text" name="cteach" id="cteach" th:value="${dto.name}" readonly >
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>일자</th>
+        <td>
+          <div class="input-container">
+            <input type="date" name="cdate" id="cdate"  th:placeholder="${entity.cdate}" required>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>시작시간</th>
+        <td>
+          <div class="input-container">
+            <select  name="ctime" id="ctime" required>
+              <option value="">-- 시작시간 선택 --</option>
+              <optgroup label="오전">
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+              </optgroup>
+              <optgroup label="오후">
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+              </optgroup>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>소요시간</th>
+        <td>
+          <div class="input-container">
+            <select name="cminute" id="cminute" required>
+              <option value="">-- 시간 선택 --</option>
+              <option value="30분">30분</option>
+              <option value="1시간">1시간</option>
+              <option value="1시간30분">1시간 30분</option>
+              <option value="2시간">2시간</option>
+              <option value="2시간30분">2시간 30분</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>장소</th>
+        <td>
+          <div class="input-container">
+            <input type="text" id="postcode" placeholder="우편번호">
+            <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>
+            <input type="text" id="address" name="address" placeholder="주소" required><br>
+            <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소">
+            <input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>수강인원</th>
+        <td>
+          <div class="input-container">
+            <input type="number" name="cpl" id="cpl" min="1" max="100" placeholder="인원수" required>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>가격</th>
+        <td><div class="input-container"><input type="number" name="cprice" id="cprice" min="10000" step="1000" required>원 </div></td>
+      </tr>
+      <tr>
+        <th>메인이미지</th>
+        <td>
+          <div class="input-container">
+            <input type="file" name="cmimage" id="cmimage">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>디테일이미지</th>
+        <td>
+          <div class="input-container">
+            <input type="file" name="cdimage" id="cdimage">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>내용</th>
+        <td>
+          <div class="input-container">
+            <textarea rows="20" cols="20" name="cdtext" id="cdtext" required></textarea>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="submit" value="입력">
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+
+</html>

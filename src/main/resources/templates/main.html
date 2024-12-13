@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>main page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <script type="text/javascript" th:src="@{/js/main.search.category.js}"></script>
+</head>
+<body>
+    <div th:replace="~{top::menu}"></div>
+    <div class="main-image-box">
+        <img src="/image/고양이.jpg">
+    </div>
+    <div class="main-container">
+        <!-- 초기 검색창 -->
+        <div class="click-search">
+            <input type="text" id="click_search_input" placeholder="검색어를 입력하세요..." >
+        </div>
+
+        <!-- 상단에서 내려오는 확장 검색창 -->
+        <div class="hidden-search" id="hidden-search">
+            <div class="search-box">
+                <form action="total_search" method="post">
+                    <!--검색할 때에는 수업명, 강사명-->
+                    <div id="search-text">
+                        <input type="text" name="tot_search" placeholder="검색어를 입력해주세요.">
+                    </div>
+                    <!--날짜-->
+                    <div id="search-day">
+                        <input type="date" name="tot_day" id="tot_day">
+                    </div>
+                    <!--시간-->
+                    <div id="search-time">
+                        <label><input type="checkbox" name="time" value="09:00" class="time-checkbox"> 09:00</label>
+                        <label><input type="checkbox" name="time" value="10:00" class="time-checkbox"> 10:00</label>
+                        <label><input type="checkbox" name="time" value="11:00" class="time-checkbox"> 11:00</label>
+                        <label><input type="checkbox" name="time" value="12:00" class="time-checkbox"> 12:00</label>
+                        <label><input type="checkbox" name="time" value="13:00" class="time-checkbox"> 13:00</label>
+                        <label><input type="checkbox" name="time" value="14:00" class="time-checkbox"> 14:00</label>
+                        <label><input type="checkbox" name="time" value="15:00" class="time-checkbox"> 15:00</label>
+                        <label><input type="checkbox" name="time" value="16:00" class="time-checkbox"> 16:00</label>
+                        <label><input type="checkbox" name="time" value="17:00" class="time-checkbox"> 17:00</label>
+                        <label><input type="checkbox" name="time" value="18:00" class="time-checkbox"> 18:00</label>
+                        <label><input type="checkbox" name="time" value="19:00" class="time-checkbox"> 19:00</label>
+                        <label><input type="checkbox" name="time" value="20:00" class="time-checkbox"> 20:00</label>
+                        <label><input type="checkbox" name="time" value="21:00" class="time-checkbox"> 21:00</label>
+                    </div>
+                    <!--카테고리-->
+                    <div id="search-category">
+                        <label>대분류 선택</label>
+                        <input type="radio" name="cat1" id="cat1" value="공예" onclick="showSubCategory('category1')">공예
+                        <input type="radio" name="cat1" id="cat2" value="예술" onclick="showSubCategory('category2')">예술
+                        <input type="radio" name="cat1" id="cat3" value="베이킹" onclick="showSubCategory('category3')">베이킹
+                        <input type="radio" name="cat1" id="cat4" value="주류" onclick="showSubCategory('category4')">주류
+                    </div>
+
+                    <div id="category1" class="sub-category" style="display: none;">
+                        <label>공예 분야 선택</label>
+                        <input type="radio" name="cat2" value="도예">도예
+                        <input type="radio" name="cat2" value="인형">인형
+                        <input type="radio" name="cat2" value="쥬얼리">쥬얼리
+                    </div>
+
+                    <div id="category2" class="sub-category" style="display: none;">
+                        <label>예술 분야 선택</label>
+                        <input type="radio" name="cat2" value="드로잉">드로잉
+                        <input type="radio" name="cat2" value="사진">사진
+                        <input type="radio" name="cat2" value="음악">음악
+                    </div>
+
+                    <div id="category3" class="sub-category" style="display: none;">
+                        <label>베이킹 분야 선택</label>
+                        <input type="radio" name="cat2" value="쿠키">쿠키
+                        <input type="radio" name="cat2" value="케이크">케이크
+                        <input type="radio" name="cat2" value="빵">빵
+                    </div>
+
+                    <div id="category4" class="sub-category" style="display: none;">
+                        <label>주류 분야 선택</label>
+                        <input type="radio" name="cat2" value="와인">와인
+                        <input type="radio" name="cat2" value="맥주">맥주
+                        <input type="radio" name="cat2" value="전통주">전통주
+                    </div>
+                    <div>
+                        <input type="submit" value="검색">
+                        <input type="reset" value="조건 초기화">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="Big-category">
+            <p id="best-oneday">베스트 ONEDAY</p>
+            <hr>
+            <ul id="category-list">
+                <li>
+                    <a th:href="@{category_class(categories='공예')}">
+                        <div class="category-box" style="background-image: url('/image/공예.jpg');">
+                            <label>공예</label>
+                            <p>공예 더보기</p>
+                        </div>
+                    </a>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="doye:${doye}">
+                                    <a th:href="@{detail(num=${doye.cnum})}">
+                                        <div class="item-box">
+                                            <span>도 예</span>
+                                            <img th:src="@{/image/}+${doye.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(doye.cname, 0, doye.cname.length() > 10 ? 10 : doye.cname.length()) + (doye.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="doll:${doll}">
+                                    <a th:href="@{detail(num=${doll.cnum})}">
+                                        <div class="item-box">
+                                            <span>인 형</span>
+                                            <img th:src="@{/image/}+${doll.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(doll.cname, 0, doll.cname.length() > 10 ? 10 : doll.cname.length()) + (doll.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="jewell:${jewell}">
+                                    <a th:href="@{detail(num=${jewell.cnum})}">
+                                        <div class="item-box">
+                                            <span>쥬얼리</span>
+                                            <img th:src="@{/image/}+${jewell.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(jewell.cname, 0, jewell.cname.length() > 10 ? 10 : jewell.cname.length()) + (jewell.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+
+                <li>
+                    <a th:href="@{category_class(categories='예술')}">
+                        <div class="category-box" style="background-image: url('/image/예술.jpg');">
+                            <label>예 술</label>
+                            <p>예술 더보기</p>
+                        </div>
+                    </a>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="drawing:${drawing}">
+                                    <a th:href="@{detail(num=${drawing.cnum})}">
+                                        <div class="item-box">
+                                            <span>드로잉</span>
+                                            <img th:src="@{/image/}+${drawing.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(drawing.cname, 0, drawing.cname.length() > 10 ? 10 : drawing.cname.length()) + (drawing.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="picture:${picture}">
+                                    <a th:href="@{detail(num=${picture.cnum})}">
+                                        <div class="item-box">
+                                            <span>사 진</span>
+                                            <img th:src="@{/image/}+${picture.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(picture.cname, 0, picture.cname.length() > 10 ? 10 : picture.cname.length()) + (picture.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="music:${music}">
+                                    <a th:href="@{detail(num=${music.cnum})}">
+                                        <div class="item-box">
+                                            <span>음 악</span>
+                                            <img th:src="@{/image/}+${music.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(music.cname, 0, music.cname.length() > 10 ? 10 : music.cname.length()) + (music.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+
+                <li>
+                    <a th:href="@{category_class(categories='베이킹')}">
+                        <div class="category-box" style="background-image: url('/image/베이킹.jpg');">
+                            <label>베이킹</label>
+                            <p>베이킹 더보기</p>
+                        </div>
+                    </a>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="cookie:${cookie}">
+                                    <a th:href="@{detail(num=${cookie.cnum})}">
+                                        <div class="item-box">
+                                            <span>쿠 키</span>
+                                            <img th:src="@{/image/}+${cookie.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(cookie.cname, 0, cookie.cname.length() > 10 ? 10 : cookie.cname.length()) + (cookie.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="cake:${cake}">
+                                    <a th:href="@{detail(num=${cake.cnum})}">
+                                        <div class="item-box">
+                                            <span>케이크</span>
+                                            <img th:src="@{/image/}+${cake.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(cake.cname, 0, cake.cname.length() > 10 ? 10 : cake.cname.length()) + (cake.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="bread:${bread}">
+                                    <a th:href="@{detail(num=${bread.cnum})}">
+                                        <div class="item-box">
+                                            <span>빵</span>
+                                            <img th:src="@{/image/}+${bread.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(bread.cname, 0, bread.cname.length() > 10 ? 10 : bread.cname.length()) + (bread.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <a th:href="@{category_class(categories='주류')}">
+                        <div class="category-box" style="background-image: url('/image/주류.jpg');">
+                            <label>주류</label>
+                            <p>주류 더보기</p>
+                        </div>
+                    </a>
+                    <div class="sub-category">
+                        <table>
+                            <tr>
+                                <td th:each="wine:${wine}">
+                                    <a th:href="@{detail(num=${wine.cnum})}">
+                                        <div class="item-box">
+                                            <span>와 인</span>
+                                            <img th:src="@{/image/}+${wine.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(wine.cname, 0, wine.cname.length() > 10 ? 10 : wine.cname.length()) + (wine.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="beer:${beer}">
+                                    <a th:href="@{detail(num=${beer.cnum})}">
+                                        <div class="item-box">
+                                            <span>맥 주</span>
+                                            <img th:src="@{/image/}+${beer.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(beer.cname, 0, beer.cname.length() > 10 ? 10 : beer.cname.length()) + (beer.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td th:each="tradition:${tradition}">
+                                    <a th:href="@{detail(num=${tradition.cnum})}">
+                                        <div class="item-box">
+                                            <span>전통주</span>
+                                            <img th:src="@{/image/}+${tradition.cmimage}" width="150px">
+                                        </div>
+                                        <p th:text="${#strings.substring(tradition.cname, 0, tradition.cname.length() > 10 ? 10 : tradition.cname.length()) + (tradition.cname.length() > 10 ? '...' : '')}"></p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table> <!-- sub-category 테이블 -->
+                    </div> <!-- sub-category 클래스 -->
+                </li> <!-- category-list 리스트 -->
+            </ul> <!-- category-list 아이디 -->
+        </div> <!-- Big-category 클래스 -->
+    </div> <!-- main-container 클래스 -->
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{top::menu}"></div>
+<body>
+<h1>회원관리</h1>
+<div>
+<table>
+    <tr>
+        <th>구분</th><th>아이디</th><th>이름</th><th>닉네임</th><th>회원상태</th><th>회원관리</th>
+    </tr>
+    <tr th:each="list:${list}" th:if="${list.auth == 1 || list.auth==2}">
+        <td>
+            <p th:if="${list.auth == 1}" th:text="'일반회원'"></p>
+            <p th:if="${list.auth == 2}" th:text="'강사'"></p>
+        </td>
+        <td>
+            <p th:text="${list.id}"></p>
+        </td>
+        <td>
+            <p th:text="${list.name}"></p>
+        </td>
+        <td>
+            <p th:text="${list.nickname}"></p>
+        </td>
+        <td>
+            <p th:text="${list.state}"></p>
+        </td>
+        <td>
+            <button type="button" th:onclick="|location.href='@{/admin/memberok(id=${list.id})}'|">가입승인</button>
+            <button type="button" th:onclick="|location.href='@{/admin/memberno(id=${list.id})}'|">가입보류</button>
+            <button type="button" th:onclick="|location.href='@{/admin/memberdelete(id=${list.id})}'|">회원탈퇴</button>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
