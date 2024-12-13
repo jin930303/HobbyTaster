@@ -3,51 +3,69 @@
 <div th:replace="~{top::menu}"></div>
 <link rel="stylesheet" type="text/css" th:href="@{/css/myinfo.css}">
 <body>
-<div class="body-container">
-
-<a href="reserve_out">
+<div class="side-bar">
+    <div class="reserve-container">
+    <a href="reserve_out">
     <div>
         <p>예약내역(진행중)</p>
     </div>
-</a>
+    </a>
+    </div>
+
+
+</div>
+
+
+<div class="body-container">
+
 
 <div th:each="list:${list}">
-<div class="id-group">
+<div class="id-container">
+    <div class="id-group">
     <h2>아이디</h2>
     <p th:text="${list.id}"></p>
+    </div>
 </div>
 
-<div class="nickname-group">
+<div class="nickname-container">
+    <div class="nickname-group">
     <h2>닉네임</h2>
     <p th:text="${list.nickname}"></p>
+    </div>
 </div>
 
-<div class="name-group">
+<div class="name-container">
+    <div class="name-group">
     <h2>이름</h2>
     <p th:text="${list.name}"></p>
+    </div>
 </div>
 
-<div class="phone-group">
+<div class="phone-container">
+    <div class="phone-group">
     <h2>전화번호</h2>
     <p th:text="${list.phone}"></p>
+    </div>
 </div>
 
-<div class="gender-group">
+<div class="gender-container">
+    <div class="gender-group">
     <h2>성별</h2>
     <p th:text="${list.gender}"></p>
+    </div>
 </div>
 
-<div class="add-group">
+<div class="add-container">
+    <div class="add-group">
     <h2>주소</h2>
     <p th:text="${list.address}"></p>
+    </div>
 </div>
-    <div class="button-group">
-        <div>
+    <div class="button-container">
+        <div class="button-group">
         <button type="button" th:onclick="|location.href='@{/my/myinfoupdateview(id=${list.id})}'|">회원정보수정</button>
-        </div>
-        <div>
         <button type="button" th:onclick="|location.href='@{/my/myinfodelete(id=${list.id})}'|">회원탈퇴</button>
-        </div>
+    </div>
     </div>
 </div>
 </div>

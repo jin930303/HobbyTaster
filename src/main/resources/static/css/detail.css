@@ -31,8 +31,8 @@ body{
     padding: 10px;
     text-align: center;
 }
-.detail-container{
-    margin-top :3em;
+.detail-container,.map-container{
+    margin-top :3%;
     margin-left : 20em;
     margin-right :20em;
 }
@@ -49,5 +49,22 @@ body{
 }
 
 #map{
-    margin-left : 20em;
+    margin-top : 3%;
+}
+.text{
+
+    font-weight : bold;
+    font-size : 20px;
+    margin-top : 3%;
+}
+.detail-text{
+    border : 1px solid;
+    margin-top : 3%;
+}
+.detail-image{
+    margin-top : 3%;
+}
+.review-list{
+   border :1px solid;
+   margin-right : 20em;
 }
