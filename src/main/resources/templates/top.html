@@ -4,32 +4,22 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/top.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
     <title>top 메뉴 바</title>
 </head>
-<body style="margin:0;">
+<body>
 <nav class="nav-container">
-    <div class="container">
-        <div class="logo-area">
-            <!-- 로고 -->
-        </div>
-        <div class="container-fluid">
-            <ul class="main-area">
-                <li>
-                    <a href="/">HOME</a>
-                </li>
-            </ul>
-            <ul class="category-area">
+    <div class="flex-container">
+        <div class="category-area">
+            <ul>
+                <li><a href="/">HOME</a></li>
                 <li>
                     <a href="#">CLASS</a>
                     <ul>
-                        <li>
-                            <a th:href="@{/teacher/cinput}" sec:authorize="hasAuthority('Teacher')"  th:text="'클래스 등록'"></a>
-                        </li>
-                        <!--
-                        <li><a href="teacher_class">클래스 관리</a></li>
--->
+                        <li><a th:href="@{/teacher/cinput}" sec:authorize="hasAuthority('Teacher')"  th:text="'클래스 등록'"></a></li>
                         <li><a th:href="@{/teacher/teacher_class}" sec:authorize="hasAuthority('Teacher')"  th:text="'클래스 관리'"></a></li>
-
                         <li><a href="#">서브 링크 1-3</a></li>
                     </ul>
                 </li>
@@ -43,8 +33,8 @@
                 </li>
             </ul>
         </div>
-        <div class="container-login">
-            <ul class="login-area">
+        <div class="login-area">
+            <ul>
                 <li>
                     <a href="/member" sec:authorize="isAnonymous()"><span class="glyphicon glyphicon-user"></span> 회원가입</a>
 

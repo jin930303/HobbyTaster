@@ -15,20 +15,25 @@ import java.util.List;
 
 @Repository
 public interface ReserveRepository extends JpaRepository<ReserveEntity, Long> {
+    @Transactional
+    @Query(value = "select cpl from cclass where cnum = :cnum",nativeQuery = true)
+    Integer findCplByCnum(@Param("cnum") long cnum);
+
+    @Transactional
+    @Query(value = "select count(*) from reserve where cnum = :cnum", nativeQuery = true)
+    Integer countByCnum(@Param("cnum") long cnum);
+
     List<ReserveEntity> findByUserId(String userId);
 
     @Transactional
     @Query(value = "select nickname from member where id = :userId", nativeQuery = true)
     String nicknamefind(@Param("userId") String userId);
 
-
     @Transactional
-    @Query(value = "select " +
-            "c.*,r.*,m.* " +
+    @Query(value = "select c.*, r.*, m.name as member_name, m.phone as member_phone, m.email as member_email " +
             "from reserve r " +
             "join cclass c on r.cnum = c.cnum " +
-            "join member m on r.nickname = m.nickname " +
-            "where m.auth = 2 and c.cteach = :nickname", nativeQuery = true)
+            "join member m on r.id = m.id " +
+            "where c.cteach = :nickname", nativeQuery = true)
     List<ClassInterface> findState(@Param("nickname") String nickname);
-
 }
