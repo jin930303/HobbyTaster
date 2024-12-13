@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/member.css}">
+</head>
 <div th:replace="~{top::menu}"></div>
 <body>
-<h1>회원가입</h1>
+    <div id="sign-text"><h1>회원가입</h1></div>
     <div>
-        <button type="button" onclick="location.href='/memberinput'">일반회원가입</button>
+        <button type="button" class="sign-container" onclick="location.href='/memberinput'">일반회원가입</button>
     </div>
     <div>
-        <button type="button" onclick="location.href='/teacherinput'">강사회원가입</button>
+        <button type="button" class="sign-container" onclick="location.href='/teacherinput'">강사회원가입</button>
     </div>
 </body>
 </html>
