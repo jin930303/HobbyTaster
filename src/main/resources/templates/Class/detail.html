@@ -4,6 +4,7 @@
 <div th:replace="~{top::menu}"></div>
 <head>
   <link rel="stylesheet" type="text/css" th:href="@{/css/detail.css}">
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a37b240a187403af09ddd6fd947c4276&libraries=services"></script>
 </head>
 <body>
 <div class="Left-container">
@@ -27,32 +28,83 @@
 </div>
 </div>
 <div class="detail-container">
+  <div class="text">상세내용</div>
+  <div class="detail-text">
+    <pre th:text="${dto.cdtext}"></pre>
+  </div>
+  <div class="text">상세이미지</div>
 <div class="detail-image">
   <img th:src="@{/image/}+${dto.cdimage}" width="1173px" class="detail-img-container">
 </div>
-<div class="detail-text">
-  <a th:text="${dto.cdtext}"></a>
-</div>
-</div>
 
+</div>
 <div class="map-container">
-
+  <div class="text">위치</div>
+  <div id="map" style="width:1173px;height:350px;"></div>
 </div>
+<script th:inline="javascript">
+  // 지도 표시 영역
+  var mapContainer = document.getElementById('map'),
+      mapOption = {
+          center: new kakao.maps.LatLng(37.56682, 126.97865), // 초기 중심 좌표
+          level: 3 // 초기 확대 레벨
+      };
 
+  // 지도를 생성
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+
+  var zoomControl = new kakao.maps.ZoomControl();
+
+  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+  // 주소-좌표 변환 객체 생성
+  var geocoder = new kakao.maps.services.Geocoder();
+
+  // Thymeleaf에서 전달받은 주소
+  var dbAddress = /*[[${dto.cadd}]]*/;
+
+  console.log("DB Address: ", dbAddress); // 디버깅용 출력
+
+  // 주소를 좌표로 변환하여 지도에 마커를 표시
+  geocoder.addressSearch(dbAddress, function(result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+          // 지도 중심 이동
+          map.setCenter(coords);
+
+          // 마커 생성
+          var marker = new kakao.maps.Marker({
+              position: coords,
+              map: map
+          });
+
+          // 인포윈도우 생성
+          var infowindow = new kakao.maps.InfoWindow({
+              content: `<div style="padding:5px;">${dbAddress}</div>`
+          });
+
+          // 인포윈도우를 마커 위에 표시
+          infowindow.open(map, marker);
+      } else {
+          console.error('주소 변환 실패: ', status);
+      }
+  });
+</script>
 <div class="review-container">
 
-  <h3>리뷰 목록</h3>
+  <div class="text">리뷰 목록</div>
   <div th:if="${reviews.isEmpty()}" class="review-emptylist">
     <p>등록된 리뷰가 없습니다.</p>
   </div>
   <div th:each="review : ${reviews}" class="review-list">
-    <h4 th:text="${review.title}">리뷰 제목</h4>
-    <p th:text="${review.contents}">리뷰 내용</p>
-    <p><img th:src="@{/image/}+${review.image1}"></p>
-    <p>평점: <span th:text="${review.revstar}">0</span></p>
-    <p>작성자: <span th:text="${review.nickname}">닉네임</span></p>
-    <p><small th:text="${review.revdate}">작성 날짜</small></p>
-    <p th:text="${review.revnum}">리뷰번호</p>
+    <div>제목 :<span th:text="${review.title}"></span></div>
+    <div>내용 :<span th:text="${review.contents}"></span></div>
+    <div><img th:src="@{/image/}+${review.image1}"></div>
+    <div>평점: <span th:text="${review.revstar}">0</span></div>
+    <div>작성자: <span th:text="${review.nickname}">닉네임</span></div>
+    <div>작성일 :<small th:text="${review.revdate}"></small></div>
+    <div>리뷰번호 :<span th:text="${review.revnum}"></span></div>
     <!-- 댓글 작성 폼 -->
   </div>
 
