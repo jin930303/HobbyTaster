@@ -4,3 +4,9 @@
     border: solid 1px;
     resize: none;
   }
+.container{
+    margin-left : 30%;
+    border : 1px solid;
+    margin-right : 30%;
+    margin-top : 3%;
+}

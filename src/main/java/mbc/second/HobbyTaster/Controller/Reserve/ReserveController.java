@@ -58,7 +58,9 @@ public class ReserveController {
         // 데이터 찾기
         List<ClassInterface> data = service.class_out(nickname);
         mo.addAttribute("data", data);
-
+        log.info("유저 아이디 : "+userId);
+        log.info("닉네임 : "+nickname);
+        log.info("데이터 확인 : "+data);
         return "reserve/class_out";
     }
 }
