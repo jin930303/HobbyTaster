@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:replace="~{top::menu}"></div>
 <head>
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/faqinput.css}">
 </head>
 <body>
-<form action="faqinput_save" method="post">
-  <table>
-    <tr>
-      <th>제목</th>
-      <td><input type="text" name="ftitle" id="ftitle" placeholder="제목을 입력해주세요." autofocus></td>
-    </tr>
-    <tr>
-      <th>내용</th>
-      <td>
-        <textarea rows="10" cols="30" name="fcontents" id="fcontents" placeholder="내용을 입력해주세요."></textarea>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="submit" value="FAQ 등록">
-        <input type="reset" value="다시 작성">
-      </td>
-    </tr>
-  </table>
-</form>
+<div th:replace="~{top::menu}"></div>
+<div id="sign-text"><h1>FAQ 등록</h1></div>
+<div class="body-container">
+    <form action="faqinput_save" method="post">
+        <div class="input-group">
+            <label>제목</label>
+            <input type="text" name="ftitle" id="ftitle" placeholder="제목을 입력해주세요." autofocus>
+        </div>
+        <div class="input-group">
+            <label>내용</label>
+            <textarea rows="10" cols="30" name="fcontents" id="fcontents" placeholder="내용을 입력해주세요."></textarea>
+        </div>
+
+        <div class="button-container">
+            <input type="submit" value="FAQ 등록">
+            <input type="reset" value="다시 작성">
+        </div>
+    </form>
+</div>
 </body>
 </html>
