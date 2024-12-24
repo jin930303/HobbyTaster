@@ -10,7 +10,7 @@
 <div th:replace="~{top::menu}"></div>
 <div id="sign-text"><h1>FAQ 등록</h1></div>
 <div class="body-container">
-    <form action="faqinput_save" method="post">
+    <form th:action="@{/my/faqinput_save}" method="post">
         <div class="input-group">
             <label>제목</label>
             <input type="text" name="ftitle" id="ftitle" placeholder="제목을 입력해주세요." autofocus>

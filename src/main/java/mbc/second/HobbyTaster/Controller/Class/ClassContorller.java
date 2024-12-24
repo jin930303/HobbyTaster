@@ -48,7 +48,7 @@ public class ClassContorller {
     @Autowired
     CommentService commentService;
 
-    String path = "C:\\mbc6\\spring_boot\\HobbyTaster\\src\\main\\resources\\static\\image";
+    String path = "C:\\Java\\HobbyTaster\\src\\main\\resources\\static\\image";
 
     @GetMapping(value = "/teacher/cinput")
     public String class0(Model mo){

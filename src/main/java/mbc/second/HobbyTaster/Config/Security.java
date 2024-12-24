@@ -45,10 +45,7 @@ public class Security{
         /* @formatter:off */
         http
         .csrf()
-        .ignoringRequestMatchers("/membersave", "/kakaosave", "/teachersave","/csave",
-                "/idcheck", "/nicknamecheck", "/emailcheck", "/phonecheck","/total_search", "/my/myinfoupdateview",
-                "/reviews","/teacher/csave","/teacher/cupdate1",
-                "/findidemail", "/findidphone","/findpw", "/updatepw", "/reserve_plus", "/reserve_out", "/teacher_class")  // 특정 경로에서만 CSRF 비활성화
+        .ignoringRequestMatchers("/**")  // 모든 경로에서 CSRF 비활성화
         .and()
         .authorizeRequests()
         .requestMatchers("/", "/main","/member","/memberinput", "/membersave",

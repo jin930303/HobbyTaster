@@ -20,7 +20,7 @@ public class FAQController {
     @GetMapping(value = "/faqin")
     public String faq1() {return "/faq/faqinput";}
 
-    @PostMapping(value = "/admin/faqinput_save")
+    @PostMapping(value = "/my/faqinput_save")
     public String faq2(FAQDTO faqdto) {
         FAQEntity faqEntity = faqdto.entity();
         faqService.faqinput_save(faqEntity);
